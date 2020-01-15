@@ -8,47 +8,40 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.TimeOfFlight;
+import frc.robot.subsystems.ColorSensor;
 
-public class GetTofDistance extends Command {
+public class GetColor extends Command {
   
-  OI oi;
-  TimeOfFlight timeofflight;
+  private ColorSensor colorSensor;
 
-  public GetTofDistance() {
+  public GetColor() {
     
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    oi = Robot.oi;
-    timeofflight = Robot.timeofflight;
+    colorSensor = Robot.colorsensor;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    System.out.println(timeofflight.getDistance());
+  public void execute() {   
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end() {
-
-  }
-
-  @Override
-  public void interrupted() {
-
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+  public void interrupted() {
+
   }
 }

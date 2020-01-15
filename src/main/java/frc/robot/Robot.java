@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.ColorSensor;
 import frc.robot.subsystems.MotorSubsystem;
 import frc.robot.subsystems.TimeOfFlight;
 
@@ -26,6 +27,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static MotorSubsystem motorSubsystem;
   public static TimeOfFlight timeofflight;
+  public static ColorSensor colorsensor;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -36,6 +38,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
     motorSubsystem = new MotorSubsystem();
     timeofflight = new TimeOfFlight();
+    colorsensor = new ColorSensor();
   }
 
   /**
@@ -48,6 +51,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    colorsensor.detectColor();
+    timeofflight.getDistance();
   }
 
   /**

@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.revrobotics.ColorSensorV3;
 
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.util.Color;
 
 
 
-public class ColorSensor extends TimedRobot {
+public class ColorSensor extends Subsystem {
   /**
    * Change the I2C port below to match the connection of your color sensor
    */
@@ -21,10 +21,15 @@ public class ColorSensor extends TimedRobot {
    * parameter. The device will be automatically initialized with default 
    * parameters.
    */
-  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+  private final ColorSensorV3 m_colorSensor;
 
-  @Override
-  public void robotPeriodic() {
+  Color detectedColor;
+
+  public ColorSensor() {
+    m_colorSensor = new ColorSensorV3(i2cPort);
+  }
+
+  public void detectColor() {
     /**
      * The method GetColor() returns a normalized color value from the sensor and can be
      * useful if outputting the color to an RGB LED or similar. To
@@ -35,7 +40,7 @@ public class ColorSensor extends TimedRobot {
      * an object is the more light from the surroundings will bleed into the 
      * measurements and make it difficult to accurately determine its color.
      */
-    final Color detectedColor = m_colorSensor.getColor();
+     detectedColor = m_colorSensor.getColor();
 
     /**
      * The sensor returns a raw IR value of the infrared light detected.
@@ -50,7 +55,10 @@ public class ColorSensor extends TimedRobot {
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("IR", IR);
+    SmartDashboard.putString("Color Name", detectedColor.toString());
 
+    if(detectedColor.red>0.5 && detectedColor.green>0.2);
+    //Testing to see if using the raw values without converting to hexidecimal to see if it is a viable option
     /**
      * In addition to RGB IR values, the color sensor can also return an 
      * infrared proximity value. The chip contains an IR led which will emit
@@ -65,6 +73,22 @@ public class ColorSensor extends TimedRobot {
     final int proximity = m_colorSensor.getProximity();
 
     SmartDashboard.putNumber("Proximity", proximity);
+
+  }
+
+  public double getRed() {
+    return detectedColor.red;
+  }
+
+  public double getGreen() {
+    return detectedColor.green;
+  }
+
+  public double getBlue() {
+    return detectedColor.blue;
+  }
+
+  public void initDefaultCommand () {
 
   }
 }

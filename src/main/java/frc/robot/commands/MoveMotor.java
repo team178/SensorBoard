@@ -16,7 +16,7 @@ public class MoveMotor extends Command {
   private MotorSubsystem motorSubsystem;
 
   public MoveMotor() {
-    requires(Robot.motorSubsystem);
+    
   }
 
   // Called just before this Command runs the first time

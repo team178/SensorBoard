@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
 import frc.robot.RobotMap;
@@ -22,6 +23,7 @@ public class TimeOfFlight extends Subsystem {
   }
 
   public double getDistance() {
+    SmartDashboard.putNumber("ToF Distance", tof.getRangeInches());
     return tof.getRangeInches();
   }
 

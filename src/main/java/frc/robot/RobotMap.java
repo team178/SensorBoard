@@ -13,7 +13,7 @@ package frc.robot;
 public class RobotMap {
 
     //Drive motors
-    public static int motor1 = 0;
+    public static int motor1 = 2;
 
     //DIO
     public static int limitSwitch = 0;
