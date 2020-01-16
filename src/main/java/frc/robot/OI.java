@@ -7,8 +7,22 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.RobotMap;
+import frc.robot.commands.GetTofDistance;
+import frc.robot.commands.MoveMotor;
+
 /**
  * Add your docs here.
  */
 public class OI {
+    public static Joystick xbox = new Joystick(RobotMap.xbox);
+    public Button xboxA = new JoystickButton(xbox, 1);
+    
+    public OI () {
+        xboxA.whenPressed(new MoveMotor());
+      //xboxA.whenPressed(new GetTofDistance());
+    }
 }
