@@ -23,13 +23,12 @@ public class TimeOfFlight extends SubsystemBase {
     System.out.println("ToF Sensor at " + String.format("0x%03x", tofsensor.getID()) + "! (with firmware version: " + tofsensor.getFirwareVersion().toString()+")");
   }
 
-  @Override
-  public void teleOpPeriodic() {
+  public void getDistance() {
     // This method will be called once per scheduler run
     if(tofsensor.inRange()){
-      System.out.printInln("distance: " + tofsensor.getDistance()+ " " + tofsensor.getError());
+      System.out.println("distance: " + tofsensor.getDistance()+ " " + tofsensor.getError());
       if(tofsensor.getDistance() <= 600){
-        private boolean ballHere = true;
+        boolean ballHere = true;
       }
     } else {
       System.out.println("out of range");

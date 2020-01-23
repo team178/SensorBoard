@@ -32,7 +32,7 @@ public class GetTofDistance extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println(timeofflight.getDistance());
+    System.out.print(timeofflight.getDistance());
   }
 
   // Called once the command ends or is interrupted.
