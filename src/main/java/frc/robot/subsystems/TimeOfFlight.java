@@ -27,6 +27,7 @@ public class TimeOfFlight extends SubsystemBase {
     // This method will be called once per scheduler run
     if(tofsensor.inRange()){
       System.out.println("distance: " + tofsensor.getDistance()+ " " + tofsensor.getError());
+      // distance measured in mm
       if(tofsensor.getDistance() <= 600){
         boolean ballHere = true;
       }
@@ -35,3 +36,7 @@ public class TimeOfFlight extends SubsystemBase {
     }
   }
 }
+
+// websites used for background understandng:
+// https://docs.wpilib.org/en/latest/docs/software/sensors/encoders-software.html
+// https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/Encoder.html
