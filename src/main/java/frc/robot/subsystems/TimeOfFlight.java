@@ -18,22 +18,29 @@ public class TimeOfFlight extends SubsystemBase {
   /**
    * Creates a new Timeofflight.
    */
-  public void robotInit() {
+  public TimeOfFlight() {
     tofsensor = new TimeOfFlightSensor(0x621);
     System.out.println("ToF Sensor at " + String.format("0x%03x", tofsensor.getID()) + "! (with firmware version: " + tofsensor.getFirwareVersion().toString()+")");
   }
 
-  public void getDistance() {
+  public void getDistance() 
+  {
+
+    System.out.println(tofsensor.getDistance());
     // This method will be called once per scheduler run
-    if(tofsensor.inRange()){
-      System.out.println("distance: " + tofsensor.getDistance()+ " " + tofsensor.getError());
+    if(tofsensor.inRange())
+    {
+      System.out.println("distance: " + tofsensor.getDistance() + " " + tofsensor.getError());
+    }
       // distance measured in mm
-      if(tofsensor.getDistance() <= 600){
+      if(tofsensor.getDistance() <= 100)
+      {
         boolean ballHere = true;
       }
-    } else {
+      else 
+      {
       System.out.println("out of range");
-    }
+      }
   }
 }
 
