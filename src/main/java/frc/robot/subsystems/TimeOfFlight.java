@@ -41,6 +41,8 @@ public class TimeOfFlight extends SubsystemBase {
   }
 }
 
+}
+
 // websites used for background understandng:
 // https://docs.wpilib.org/en/latest/docs/software/sensors/encoders-software.html
 // https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/Encoder.html
