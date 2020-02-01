@@ -25,7 +25,7 @@ import frc.robot.subsystems.TimeOfFlight;
 public class Robot extends TimedRobot {
 
   public static OI oi;
-//  public static MotorSubsystem motorSubsystem;
+  public static MotorSubsystem motorSubsystem;
   public static TimeOfFlight timeofflight1;
   public static TimeOfFlight timeofflight2;
   public static ColorSensor colorsensor;
@@ -37,9 +37,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-//    motorSubsystem = new MotorSubsystem();
-    timeofflight1 = new TimeOfFlight(0x621);
-    timeofflight2 = new TimeOfFlight(0x622);
+    motorSubsystem = new MotorSubsystem();
+    timeofflight1 = new TimeOfFlight(0x620);
+    timeofflight2 = new TimeOfFlight(0x621);
     colorsensor = new ColorSensor();
   }
 
@@ -53,10 +53,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    colorsensor.detectColor();
-    timeofflight1.getDistance();
-    timeofflight2.getDistance();
-  }
+    SmartDashboard.putNumber("TOF 1 Distance", timeofflight1.getDistance());
+    SmartDashboard.putNumber("TOF 2 Distance", timeofflight2.getDistance());
+    SmartDashboard.putString("TOF 1 Edge", timeofflight1.getEdge());
+    SmartDashboard.putString("TOF 2 Edge", timeofflight2.getEdge());
+    
+}
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -87,6 +89,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    colorsensor.detectColor();
   }
 
   /**
