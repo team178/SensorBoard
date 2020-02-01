@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.ColorSensor;
 import frc.robot.subsystems.MotorSubsystem;
 import frc.robot.subsystems.TimeOfFlight;
+import frc.robot.subsystems.WheelOfFortuneContestant;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot {
   public static TimeOfFlight timeofflight1;
   public static TimeOfFlight timeofflight2;
   public static ColorSensor colorsensor;
+  public static WheelOfFortuneContestant wheelOfFortuneContestant;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -41,6 +43,7 @@ public class Robot extends TimedRobot {
     timeofflight1 = new TimeOfFlight(0x620);
     timeofflight2 = new TimeOfFlight(0x621);
     colorsensor = new ColorSensor();
+    wheelOfFortuneContestant = new WheelOfFortuneContestant();
   }
 
   /**
