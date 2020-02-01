@@ -25,8 +25,9 @@ import frc.robot.subsystems.TimeOfFlight;
 public class Robot extends TimedRobot {
 
   public static OI oi;
-  public static MotorSubsystem motorSubsystem;
-  public static TimeOfFlight timeofflight;
+//  public static MotorSubsystem motorSubsystem;
+  public static TimeOfFlight timeofflight1;
+  public static TimeOfFlight timeofflight2;
   public static ColorSensor colorsensor;
 
   /**
@@ -36,8 +37,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    motorSubsystem = new MotorSubsystem();
-    timeofflight = new TimeOfFlight();
+//    motorSubsystem = new MotorSubsystem();
+    timeofflight1 = new TimeOfFlight(0x621);
+    timeofflight2 = new TimeOfFlight(0x622);
     colorsensor = new ColorSensor();
   }
 
@@ -52,7 +54,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     colorsensor.detectColor();
-    timeofflight.getDistance();
+    timeofflight1.getDistance();
+    timeofflight2.getDistance();
   }
 
   /**

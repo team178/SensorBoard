@@ -26,13 +26,13 @@ public class GetTofDistance extends Command {
   @Override
   public void initialize() {
     oi = Robot.oi;
-    timeofflight = Robot.timeofflight;
+    timeofflight = Robot.timeofflight1;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.print(timeofflight.getDistance());
+    timeofflight.getDistance();
   }
 
   // Called once the command ends or is interrupted.
