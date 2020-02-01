@@ -12,28 +12,32 @@ import org.letsbuildrockets.libs.TimeOfFlightSensor;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 
+
+
 public class TimeOfFlight extends SubsystemBase {
 
   private TimeOfFlightSensor tofsensor;
-  /**
-   * Creates a new Timeofflight.
-   */
+
   public TimeOfFlight(int port) {
     tofsensor = new TimeOfFlightSensor(port);
     System.out.println("ToF Sensor at " + String.format("0x%03x", tofsensor.getID()) + "! (with firmware version: " + tofsensor.getFirwareVersion().toString()+")");
   }
 
   public void getDistance() {
-    // This method will be called once per scheduler run
+
+    System.out.println(tofsensor.getDistance());
+
     if(tofsensor.inRange()) {
       System.out.println("distance: " + tofsensor.getDistance()+ " " + tofsensor.getError());
       // distance measured in mm
-      if(tofsensor.getDistance() <= 600){
+      if(tofsensor.getDistance() <= 100)
+      {
         boolean ballHere = true;
       }
-    } else {
+      else 
+      {
       System.out.println("out of range");
-    }
+      }
   }
 }
 
