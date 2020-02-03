@@ -8,47 +8,51 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.TimeOfFlight;
+import frc.robot.subsystems.WheelOfFortuneContestant;
 
-public class GetTofDistance extends Command {
+
+
+public class SpinWheelOfFortuneByRotations extends Command {
+ 
+
+  private static WheelOfFortuneContestant wheelOfFortuneContestant = Robot.wheelOfFortuneContestant;
+  public static final double spinPower = 1;
   
-  OI oi;
-  TimeOfFlight timeofflight;
 
-  public GetTofDistance() {
-    
+  public SpinWheelOfFortuneByRotations() {
+    addRequirements(Robot.wheelOfFortuneContestant);
   }
 
   // Called when the command is initially scheduled.
+ 
   @Override
-  public void initialize() {
-    oi = Robot.oi;
-    timeofflight = Robot.timeofflight1;
+  public void initialize() { //init wheeloffortunecontestant subsystem
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    timeofflight.getDistance();
+  public void execute() { //spins the wheel
+
+    while(wheelOfFortuneContestant.getRot() < 3)
+    {
+      wheelOfFortuneContestant.spinToWin(spinPower);
+    }
+    
+      wheelOfFortuneContestant.spinToWin(0);
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end() {
-
-  }
-
-  @Override
-  public void interrupted() {
+  public void end(boolean interrupted) {
 
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
-    return false;
+  public boolean isFinished() { //if rotations between 3-5 return true
+  return false;
   }
 }

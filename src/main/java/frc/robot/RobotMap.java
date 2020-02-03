@@ -21,6 +21,7 @@ public class RobotMap {
     public static int bit2 = 4;
     public static int bit3 = 5;
     public static int bit4 = 6;
+    public static int contestant = 11;
 
     //CAN - Temporary values
     public static int tofInput = 7;

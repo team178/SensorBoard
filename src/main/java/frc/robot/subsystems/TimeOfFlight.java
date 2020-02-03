@@ -8,35 +8,55 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import java.nio.DoubleBuffer;
 import org.letsbuildrockets.libs.TimeOfFlightSensor;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 
+
+
 public class TimeOfFlight extends SubsystemBase {
 
   private TimeOfFlightSensor tofsensor;
-  /**
-   * Creates a new Timeofflight.
-   */
-  public void robotInit() {
-    tofsensor = new TimeOfFlightSensor(0x621);
+  private double[] values;
+  private String lastEdge;
+  public final double MAX = 150;
+  public final double MIN = 60;
+
+  public TimeOfFlight(int port) {
+    tofsensor = new TimeOfFlightSensor(port);
     System.out.println("ToF Sensor at " + String.format("0x%03x", tofsensor.getID()) + "! (with firmware version: " + tofsensor.getFirwareVersion().toString()+")");
+    values = new double[2]; 
+    lastEdge = "None";
   }
 
-  public void getDistance() {
-    // This method will be called once per scheduler run
-    if(tofsensor.inRange()){
-      System.out.println("distance: " + tofsensor.getDistance()+ " " + tofsensor.getError());
-      // distance measured in mm
-      if(tofsensor.getDistance() <= 600){
-        boolean ballHere = true;
-      }
-    } else {
-      System.out.println("out of range");
+  public double getDistance() {
+    values[1] = values[0];
+    values[0] = tofsensor.getDistance();
+    return values[0];
+  }
+
+  public String getEdge() {
+    double secant = (values[1] - values[0])/0.02;
+    //System.out.println("Slope of Secant Line: " + secant);
+    if (values[0] > MAX) { //test this max value
+      return "No ball";
+    } else if (values[0] < MIN) { //test this min value
+      return "Center";
+    } else if (secant > 100) {
+      lastEdge = "Leading";
+      return "Leading";
+    } else if (secant < -100) {
+      lastEdge = "Trailing";
+      return "Trailing";
+    } else if (lastEdge == "Leading") {
+      return "Leading";
+    } else if (lastEdge == "Trailing") {
+      return "Trailing";
+    } else if (lastEdge == "None") {
+      return "No ball";
     }
+    return "No ball";
+    //A minimum value returns "Center", a maximum value returns "No Ball"
   }
 }
-
-// websites used for background understandng:
-// https://docs.wpilib.org/en/latest/docs/software/sensors/encoders-software.html
-// https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/Encoder.html

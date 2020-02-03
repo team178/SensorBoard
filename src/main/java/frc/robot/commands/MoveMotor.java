@@ -33,7 +33,7 @@ public class MoveMotor extends Command {
       motorSubsystem.driveMotor(.1);
     } else {
       motorSubsystem.driveMotor(0);
-    }
+    } 
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -45,7 +45,7 @@ public class MoveMotor extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    motorSubsystem.driveMotor(0);
+//    motorSubsystem.driveMotor(0);
   }
 
   // Called when another command which requires one or more of the same
