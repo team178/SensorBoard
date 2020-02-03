@@ -29,6 +29,7 @@ public class Robot extends TimedRobot {
   public static MotorSubsystem motorSubsystem;
   public static TimeOfFlight timeofflight1;
   public static TimeOfFlight timeofflight2;
+  public static TimeOfFlight timeofflight3;
   public static ColorSensor colorsensor;
   public static WheelOfFortuneContestant wheelOfFortuneContestant;
 
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
     motorSubsystem = new MotorSubsystem();
     timeofflight1 = new TimeOfFlight(0x620);
     timeofflight2 = new TimeOfFlight(0x621);
+    timeofflight3 = new TimeOfFlight(0x622);
     colorsensor = new ColorSensor();
     wheelOfFortuneContestant = new WheelOfFortuneContestant();
   }
@@ -58,8 +60,10 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     SmartDashboard.putNumber("TOF 1 Distance", timeofflight1.getDistance());
     SmartDashboard.putNumber("TOF 2 Distance", timeofflight2.getDistance());
+    SmartDashboard.putNumber("TOF 3 Distance", timeofflight3.getDistance());
     SmartDashboard.putString("TOF 1 Edge", timeofflight1.getEdge());
     SmartDashboard.putString("TOF 2 Edge", timeofflight2.getEdge());
+    SmartDashboard.putString("TOF 3 Distance", timeofflight3.getEdge());
     
 }
 

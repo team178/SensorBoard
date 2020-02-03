@@ -21,7 +21,7 @@ public class SpinWheelOfFortuneByRotations extends Command {
   
 
   public SpinWheelOfFortuneByRotations() {
-    addRequirements(Robot.wheelOfFortuneContestant);
+    
   }
 
   // Called when the command is initially scheduled.
@@ -42,12 +42,6 @@ public class SpinWheelOfFortuneByRotations extends Command {
     
       wheelOfFortuneContestant.spinToWin(0);
     
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-
   }
 
   // Returns true when the command should end.
