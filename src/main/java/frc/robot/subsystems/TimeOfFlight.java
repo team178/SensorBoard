@@ -23,7 +23,7 @@ public class TimeOfFlight extends SubsystemBase {
   private boolean inTrigger;
   private boolean outTrigger;
 
-  public TimeOfFlight(int port) {
+  public TimeOfFlight() {
     tof1 = new TimeOfFlightSensor(0x0620);
     tof2 = new TimeOfFlightSensor(0x0621);
     counter = 0;
@@ -65,5 +65,9 @@ public class TimeOfFlight extends SubsystemBase {
       counter--;
       outTrigger = false;
     }
+  }
+
+  public int getCounter() {
+    return counter;
   }
 }
