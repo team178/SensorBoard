@@ -26,6 +26,9 @@ public class SpinWheelOfFortuneByRotations extends Command {
 
   // Called when the command is initially scheduled.
  
+  private void addRequirements(WheelOfFortuneContestant wheelOfFortuneContestant2) {
+  }
+
   @Override
   public void initialize() { //init wheeloffortunecontestant subsystem
     
@@ -44,13 +47,17 @@ public class SpinWheelOfFortuneByRotations extends Command {
     
   }
 
+<<<<<<< HEAD
   // Called once the command ends or is interrupted.
   @Override
   public void end() {
   
   }
 
+=======
+>>>>>>> ab2a377f0008b91205fd583b0c7d2bed0c0149a8
   // Returns true when the command should end.
+  
   @Override
   public boolean isFinished() { //if rotations between 3-5 return true
   return false;

@@ -17,46 +17,57 @@ import edu.wpi.first.wpilibj.TimedRobot;
 
 public class TimeOfFlight extends SubsystemBase {
 
-  private TimeOfFlightSensor tofsensor;
-  private double[] values;
-  private String lastEdge;
-  public final double MAX = 150;
-  public final double MIN = 60;
+  private TimeOfFlightSensor tof1;
+  private TimeOfFlightSensor tof2;
+  private int counter;
+  private boolean inTrigger;
+  private boolean outTrigger;
 
-  public TimeOfFlight(int port) {
-    tofsensor = new TimeOfFlightSensor(port);
-    System.out.println("ToF Sensor at " + String.format("0x%03x", tofsensor.getID()) + "! (with firmware version: " + tofsensor.getFirwareVersion().toString()+")");
-    values = new double[2]; 
-    lastEdge = "None";
+  public TimeOfFlight() {
+    tof1 = new TimeOfFlightSensor(0x0620);
+    tof2 = new TimeOfFlightSensor(0x0621);
+    counter = 0;
+    inTrigger = true;
+    outTrigger = false;
   }
 
-  public double getDistance() {
-    values[1] = values[0];
-    values[0] = tofsensor.getDistance();
-    return values[0];
+  public double getDistance1() {
+    return tof1.getD();
   }
 
-  public String getEdge() {
-    double secant = (values[1] - values[0])/0.02;
-    //System.out.println("Slope of Secant Line: " + secant);
-    if (values[0] > MAX) { //test this max value
-      return "No ball";
-    } else if (values[0] < MIN) { //test this min value
-      return "Center";
-    } else if (secant > 100) {
-      lastEdge = "Leading";
-      return "Leading";
-    } else if (secant < -100) {
-      lastEdge = "Trailing";
-      return "Trailing";
-    } else if (lastEdge == "Leading") {
-      return "Leading";
-    } else if (lastEdge == "Trailing") {
-      return "Trailing";
-    } else if (lastEdge == "None") {
-      return "No ball";
+  public double getDistance2() {
+    return tof2.getD();
+  }
+
+  public String getEdge1() {
+    return tof1.getEdge();
+  }
+
+  public String getEdge2() {
+    return tof2.getEdge();
+  }
+
+  public void addToCounter() {
+    if (tof1.getEdge() == "Leading" && inTrigger) {
+      counter++;
+      inTrigger = false;
     }
-    return "No ball";
-    //A minimum value returns "Center", a maximum value returns "No Ball"
+    if (tof1.getEdge() == "No ball" && !inTrigger) {
+      inTrigger = true;
+    }
+  }
+
+  public void removeFromCounter() {
+    if (tof2.getEdge() == "Leading" && !outTrigger) {
+      outTrigger = true;
+    }
+    if (tof2.getEdge() == "No ball" && outTrigger) {
+      counter--;
+      outTrigger = false;
+    }
+  }
+
+  public int getCounter() {
+    return counter;
   }
 }

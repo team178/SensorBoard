@@ -38,6 +38,12 @@ public class TimeOfFlightSensor {
     protected CustomCAN tofsensor;
     protected static int TOFCount = 0;
 
+    //178 specific fields
+    private double[] values;
+    private String lastEdge;
+    public final double MAX = 150;
+    public final double MIN = 60;
+
     public TimeOfFlightSensor(int ID) {
         tofsensor = new CustomCAN("TOF"+String.valueOf(TOFCount), ID);
         _firmwareVersion = new VersionNumber(0, 0);
@@ -47,7 +53,12 @@ public class TimeOfFlightSensor {
         packetTimer.start();
         getFirwareVersion();
         if(_firmwareVersion.isOlderThan(minVersion))
-            HAL.sendError(true, -2, false, "LBR: Old Firmware! ToF sensor at " + String.format("0x%04x", _ID) + " is on firmware version " + _firmwareVersion.toString() + " but version " + minVersion.toString() + " is required. Upgrade ToF firmware, or downagrade the TimeOfFlight Java library!", "", "", false);    
+            HAL.sendError(true, -2, false, "LBR: Old Firmware! ToF sensor at " + String.format("0x%04x", _ID) + " is on firmware version " + _firmwareVersion.toString() + " but version " + minVersion.toString() + " is required. Upgrade ToF firmware, or downagrade the TimeOfFlight Java library!", "", "", false);
+        
+        //178 specific fields
+        System.out.println("ToF Sensor at " + String.format("0x%03x", getID()) + "! (with firmware version: " + getFirwareVersion().toString()+")");
+        values = new double[2]; 
+        lastEdge = "None";    
     }
 
     private void readBuffer() {
@@ -147,5 +158,36 @@ public class TimeOfFlightSensor {
             readBuffer();
         return (_error == 0);
     }
+
+//178 specific methods
+public double getD() {
+    values[1] = values[0];
+    values[0] = getDistance();
+    return values[0];
+  }
+
+  public String getEdge() {
+    double secant = (values[1] - values[0])/0.02;
+    //System.out.println("Slope of Secant Line: " + secant);
+    if (values[0] > MAX) { //test this max value
+      return "No ball";
+    } else if (values[0] < MIN) { //test this min value
+      return "Center";
+    } else if (secant > 100) {
+      lastEdge = "Leading";
+      return "Leading";
+    } else if (secant < -100) {
+      lastEdge = "Trailing";
+      return "Trailing";
+    } else if (lastEdge == "Leading") {
+      return "Leading";
+    } else if (lastEdge == "Trailing") {
+      return "Trailing";
+    } else if (lastEdge == "None") {
+      return "No ball";
+    }
+    return "No ball";
+    //A minimum value returns "Center", a maximum value returns "No Ball"
+  }
 
 }

@@ -27,8 +27,7 @@ public class Robot extends TimedRobot {
 
   public static OI oi;
   public static MotorSubsystem motorSubsystem;
-  public static TimeOfFlight timeofflight1;
-  public static TimeOfFlight timeofflight2;
+  public static TimeOfFlight timeofflight;
   public static ColorSensor colorsensor;
   public static WheelOfFortuneContestant wheelOfFortuneContestant;
 
@@ -40,8 +39,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     oi = new OI();
     motorSubsystem = new MotorSubsystem();
-    timeofflight1 = new TimeOfFlight(0x620);
-    timeofflight2 = new TimeOfFlight(0x621);
+    timeofflight = new TimeOfFlight();
     colorsensor = new ColorSensor();
     wheelOfFortuneContestant = new WheelOfFortuneContestant();
   }
@@ -56,11 +54,22 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+<<<<<<< HEAD
     SmartDashboard.putNumber("TOF 1 Distance", timeofflight1.getDistance());
     SmartDashboard.putNumber("TOF 2 Distance", timeofflight2.getDistance());
     SmartDashboard.putString("TOF 1 Edge", timeofflight1.getEdge());
     SmartDashboard.putString("TOF 2 Edge", timeofflight2.getEdge());
     colorsensor.detectColor();
+=======
+    timeofflight.addToCounter();
+    timeofflight.removeFromCounter();
+    SmartDashboard.putNumber("TOF 1 Distance", timeofflight.getDistance1());
+    SmartDashboard.putNumber("TOF 2 Distance", timeofflight.getDistance2());
+    SmartDashboard.putNumber("Number of Balls In Mechanism", timeofflight.getCounter());
+    SmartDashboard.putString("TOF 1 Edge", timeofflight.getEdge1());
+    SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
+    
+>>>>>>> ab2a377f0008b91205fd583b0c7d2bed0c0149a8
 }
 
   /**
