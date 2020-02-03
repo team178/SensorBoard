@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
 import com.revrobotics.ColorSensorV3;
 
@@ -51,6 +52,7 @@ public class ColorSensor extends Subsystem {
      * Open Smart Dashboard or Shuffleboard to see the color detected by the 
      * sensor.
      */
+  
     SmartDashboard.putNumber("Red", detectedColor.red);
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
