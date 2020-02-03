@@ -47,15 +47,6 @@ public class SpinWheelOfFortuneByRotations extends Command {
     
   }
 
-<<<<<<< HEAD
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end() {
-  
-  }
-
-=======
->>>>>>> ab2a377f0008b91205fd583b0c7d2bed0c0149a8
   // Returns true when the command should end.
   
   @Override

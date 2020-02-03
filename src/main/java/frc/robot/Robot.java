@@ -54,13 +54,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-<<<<<<< HEAD
-    SmartDashboard.putNumber("TOF 1 Distance", timeofflight1.getDistance());
-    SmartDashboard.putNumber("TOF 2 Distance", timeofflight2.getDistance());
-    SmartDashboard.putString("TOF 1 Edge", timeofflight1.getEdge());
-    SmartDashboard.putString("TOF 2 Edge", timeofflight2.getEdge());
-    colorsensor.detectColor();
-=======
     timeofflight.addToCounter();
     timeofflight.removeFromCounter();
     SmartDashboard.putNumber("TOF 1 Distance", timeofflight.getDistance1());
@@ -68,10 +61,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Number of Balls In Mechanism", timeofflight.getCounter());
     SmartDashboard.putString("TOF 1 Edge", timeofflight.getEdge1());
     SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
-    
->>>>>>> ab2a377f0008b91205fd583b0c7d2bed0c0149a8
-}
-
+    SmartDashboard.putString("Color Match", wheelOfFortuneContestant.getMatch());
+  }
   /**
    * This autonomous (along with the chooser code above) shows how to select
    * between different autonomous modes using the dashboard. The sendable

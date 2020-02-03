@@ -55,7 +55,7 @@ public class WheelOfFortuneContestant extends SubsystemBase {
   // this isn't the final value, this will change depending on sensor placement
   private final static Color DESIRE = Blue;
   ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
-  
+  private String colorString;
 
 
   public void spinToWin(double power) {
@@ -101,6 +101,19 @@ public class WheelOfFortuneContestant extends SubsystemBase {
     }
     
 
+    if (match.color == Blue) {
+      colorString = "Blue";
+    } else if (match.color == Red) {
+      colorString = "Red";
+    } else if (match.color == Green) {
+      colorString = "Green";
+    } else if (match.color == Yellow) {
+      colorString = "Yellow";
+    } else {
+      colorString = "Unknown";
+    }
+
+    SmartDashboard.putString("Color Found", colorString);
     /**
      * In addition to RGB IR values, the color sensor can also return an 
      * infrared proximity value. The chip contains an IR led which will emit
@@ -179,17 +192,22 @@ public class WheelOfFortuneContestant extends SubsystemBase {
        return rot;
      }
 
-     public boolean checkForColor(Color a, Color b, Color c) {
-       if () {
-         if () {
-           if () {
-             return true;
-           }
-         }
-       }
-       return false;
-     }
+    //  public boolean checkForColor(Color a, Color b, Color c) {
+    //    if () {
+    //      if () {
+    //        if () {
+    //          return true;
+    //        }
+    //      }
+    //    }
+    //    return false;
+  // }
     
+  public String getMatch()
+  {
+    return colorString;
+  }
+
 }
    
 
