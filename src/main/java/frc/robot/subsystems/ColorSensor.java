@@ -57,7 +57,6 @@ public class ColorSensor extends Subsystem {
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("IR", IR);
-    SmartDashboard.putString("Color Name", detectedColor.toString());
 
     if(detectedColor.red>0.5 && detectedColor.green>0.2);
     //Testing to see if using the raw values without converting to hexidecimal to see if it is a viable option

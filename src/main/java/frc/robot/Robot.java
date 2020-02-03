@@ -60,7 +60,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("TOF 2 Distance", timeofflight2.getDistance());
     SmartDashboard.putString("TOF 1 Edge", timeofflight1.getEdge());
     SmartDashboard.putString("TOF 2 Edge", timeofflight2.getEdge());
-    
+    colorsensor.detectColor();
 }
 
   /**

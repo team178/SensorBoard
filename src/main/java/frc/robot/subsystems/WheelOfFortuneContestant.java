@@ -42,10 +42,14 @@ public class WheelOfFortuneContestant extends SubsystemBase {
  
   private final static ColorMatch m_colorMatcher = new ColorMatch();
   // private static final Color BLUE = new ColorMatch.makeColor(0, 0, );
-  public static final Color Blue = ColorMatch.makeColor(0.136, 0.412, 0.450);
-  public static final Color Green = ColorMatch.makeColor(0.196, 0.557, 0.246);
-  public static final Color Red = ColorMatch.makeColor(0.475, 0.371, 0.153);
-  public static final Color Yellow = ColorMatch.makeColor(0.293, 0.561, 0.144);
+  public static final Color Blue = ColorMatch.makeColor(0.148, 0.442, 0.408); //Proximity 250
+  public static final Color BlueLow = ColorMatch.makeColor(0.090, 0.423, 0.465); //Proximity 2047
+
+  public static final Color Green = ColorMatch.makeColor(0.196, 0.557, 0.246); //Proximity 2047
+
+  public static final Color Red = ColorMatch.makeColor(0.475, 0.371, 0.153); //Proximity 2047
+
+  public static final Color Yellow = ColorMatch.makeColor(0.293, 0.561, 0.144); //Proximity 2047
   public static final Color Black = ColorMatch.makeColor(0,0,0);
   private final double PROXIMITY = 0; // IR
   // this isn't the final value, this will change depending on sensor placement
@@ -80,7 +84,21 @@ public class WheelOfFortuneContestant extends SubsystemBase {
      * Open Smart Dashboard or Shuffleboard to see the color detected by the 
      * sensor.
      */
-    
+    if(match.color == Blue || match.color == BlueLow){
+      SmartDashboard.putString("Color", "Blue");
+    }
+
+    if(match.color == Red){
+      SmartDashboard.putString("Color", "Red");
+    }
+
+    if(match.color == Green){
+      SmartDashboard.putString("Color", "Green");
+    }
+
+    if(match.color == Yellow){
+      SmartDashboard.putString("Color", "Yellow");
+    }
     
 
     /**
@@ -159,6 +177,17 @@ public class WheelOfFortuneContestant extends SubsystemBase {
      public int getRot()
      {
        return rot;
+     }
+
+     public boolean checkForColor(Color a, Color b, Color c) {
+       if () {
+         if () {
+           if () {
+             return true;
+           }
+         }
+       }
+       return false;
      }
     
 }

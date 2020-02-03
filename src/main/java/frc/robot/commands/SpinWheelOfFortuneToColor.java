@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.ColorSensor;
 import frc.robot.subsystems.WheelOfFortuneContestant;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -20,6 +21,7 @@ import com.revrobotics.ColorMatchResult;
 
 public class SpinWheelOfFortuneToColor extends CommandBase {
   WheelOfFortuneContestant wheelOfFortuneContestant = Robot.wheelOfFortuneContestant;
+  ColorSensor colorSensor = Robot.colorsensor;
   
   private final static ColorMatch m_colorMatcher = new ColorMatch();
   // private static final Color BLUE = new ColorMatch.makeColor(0, 0, );
@@ -107,12 +109,7 @@ public class SpinWheelOfFortuneToColor extends CommandBase {
       else{
         wheelOfFortuneContestant.spinToWin(0);
       }
-    
-    
-
-
-
-
+  
 
 
   }
