@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj.util.Color;
 public class ColorSensorSubsystem extends Subsystem {
 
   ColorSensor colorsensor;
-  public static final Color Blue = ColorMatch.makeColor(0.136, 0.412, 0.450);
+  public static final Color Blue = ColorMatch.makeColor(0.153, 0.445, 0.402);
   public static final Color Green = ColorMatch.makeColor(0.196, 0.557, 0.246);
   public static final Color Red = ColorMatch.makeColor(0.475, 0.371, 0.153);
-  public static final Color Yellow = ColorMatch.makeColor(0.293, 0.561, 0.144);
+  public static final Color Yellow = ColorMatch.makeColor(0.319, 0.545, 0.136);
   public static final Color Black = ColorMatch.makeColor(0,0,0);
 
   public ColorSensorSubsystem() {
@@ -28,6 +28,12 @@ public class ColorSensorSubsystem extends Subsystem {
 
   public String getColor() {
     Color c = colorsensor.detectColor();
+    System.out.println("Red: " + c.red);
+    System.out.println("Green: " + c.green);
+    System.out.println("Blue: " + c.blue);
+    SmartDashboard.putNumber("Red", c.red);
+    SmartDashboard.putNumber("Green", c.green);
+    SmartDashboard.putNumber("Blue", c.blue);
     if (compareColors(c, Blue))
       return "Blue";
     if (compareColors(c, Green))

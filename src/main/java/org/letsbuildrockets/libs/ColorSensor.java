@@ -19,15 +19,13 @@ import edu.wpi.first.wpilibj.util.Color;
 public class ColorSensor {
     private final I2C.Port i2cport = I2C.Port.kOnboard;
     private ColorSensorV3 colorsensor;
-    private ColorMatch colormatcher;
 
     public ColorSensor() {
         colorsensor = new ColorSensorV3(i2cport);
-        colormatcher = new ColorMatch();
     }
 
     public Color detectColor() {
-        return colormatcher.matchClosestColor(colorsensor.getColor()).color;
+        return colorsensor.getColor();
     }
 
     public double getRed() {
