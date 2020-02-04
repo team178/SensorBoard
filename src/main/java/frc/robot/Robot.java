@@ -11,10 +11,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.ColorSensor;
+import frc.robot.subsystems.ColorSensorSubsystem;
 import frc.robot.subsystems.MotorSubsystem;
 import frc.robot.subsystems.TimeOfFlight;
-import frc.robot.subsystems.WheelOfFortuneContestant;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,8 +27,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static MotorSubsystem motorSubsystem;
   public static TimeOfFlight timeofflight;
-  public static ColorSensor colorsensor;
-  public static WheelOfFortuneContestant wheelOfFortuneContestant;
+  public static ColorSensorSubsystem colorsensor;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -40,8 +38,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
     motorSubsystem = new MotorSubsystem();
     timeofflight = new TimeOfFlight();
-    colorsensor = new ColorSensor();
-    wheelOfFortuneContestant = new WheelOfFortuneContestant();
+    colorsensor = new ColorSensorSubsystem();
   }
 
   /**
@@ -61,7 +58,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Number of Balls In Mechanism", timeofflight.getCounter());
     SmartDashboard.putString("TOF 1 Edge", timeofflight.getEdge1());
     SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
-    SmartDashboard.putString("Color Match", wheelOfFortuneContestant.getMatch());
+    SmartDashboard.putString("Color Match", colorsensor.getColor());
   }
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -92,7 +89,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    colorsensor.detectColor();
   }
 
   /**

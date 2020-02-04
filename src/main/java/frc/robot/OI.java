@@ -11,10 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.RobotMap;
-import frc.robot.commands.GetColor;
 //import frc.robot.commands.GetTofDistance;
 import frc.robot.commands.MoveMotor;
-import frc.robot.commands.SpinWheelOfFortuneByRotations;
 
 /**
  * Add your docs here.
@@ -26,6 +24,5 @@ public class OI {
     public OI () {
        // xboxA.whenPressed(new MoveMotor());
       //xboxA.whenPressed(new GetTofDistance());
-      xboxA.whileHeld(new SpinWheelOfFortuneByRotations());
     }
 }
