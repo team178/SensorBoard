@@ -59,6 +59,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("TOF 1 Edge", timeofflight.getEdge1());
     SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
     SmartDashboard.putString("Color Match", colorsensor.getColor());
+    SmartDashboard.putString("Intake Motor State", timeofflight.moveMotor());
   }
   /**
    * This autonomous (along with the chooser code above) shows how to select

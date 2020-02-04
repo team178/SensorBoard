@@ -18,6 +18,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import org.letsbuildrockets.libs.TimeOfFlightSensor;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
@@ -75,12 +76,16 @@ public class TimeOfFlight extends SubsystemBase {
     }
   }
 
-  public void moveMotor() {
+  public String moveMotor() {
     if (getEdge1() == "Leading") {
       motor.set(ControlMode.PercentOutput, 1);
+      return "Moving";
     } else if (getEdge2() == "Trailing") {
       motor.set(ControlMode.PercentOutput, 0);
+      System.out.println("stopped");
+      return "Not Moving";
     }
+    return "Previous State";
   }
 
   public int getCounter() {
@@ -89,6 +94,6 @@ public class TimeOfFlight extends SubsystemBase {
 
   @Override
   public void periodic() {
-    moveMotor();
+    
   }
 }

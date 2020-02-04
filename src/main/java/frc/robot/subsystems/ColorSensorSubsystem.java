@@ -28,9 +28,9 @@ public class ColorSensorSubsystem extends Subsystem {
 
   public String getColor() {
     Color c = colorsensor.detectColor();
-    System.out.println("Red: " + c.red);
-    System.out.println("Green: " + c.green);
-    System.out.println("Blue: " + c.blue);
+    //System.out.println("Red: " + c.red);
+    //System.out.println("Green: " + c.green);
+    //System.out.println("Blue: " + c.blue);
     SmartDashboard.putNumber("Red", c.red);
     SmartDashboard.putNumber("Green", c.green);
     SmartDashboard.putNumber("Blue", c.blue);
