@@ -8,7 +8,13 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
+
 import java.nio.DoubleBuffer;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import org.letsbuildrockets.libs.TimeOfFlightSensor;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -19,6 +25,7 @@ public class TimeOfFlight extends SubsystemBase {
 
   private TimeOfFlightSensor tof1;
   private TimeOfFlightSensor tof2;
+  private VictorSPX motor;
   private int counter;
   private boolean inTrigger;
   private boolean outTrigger;
@@ -26,6 +33,7 @@ public class TimeOfFlight extends SubsystemBase {
   public TimeOfFlight() {
     tof1 = new TimeOfFlightSensor(0x0620);
     tof2 = new TimeOfFlightSensor(0x0621);
+    motor = new VictorSPX(RobotMap.motor1);
     counter = 0;
     inTrigger = true;
     outTrigger = false;
@@ -64,6 +72,14 @@ public class TimeOfFlight extends SubsystemBase {
     if (tof2.getEdge() == "No ball" && outTrigger) {
       counter--;
       outTrigger = false;
+    }
+  }
+
+  public void moveMotor() {
+    if (getEdge1() == "Leading") {
+      motor.set(ControlMode.PercentOutput, 1);
+    } else if (getEdge2() == "Trailing") {
+      motor.set(ControlMode.PercentOutput, 0);
     }
   }
 
