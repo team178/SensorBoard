@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.ColorMatch;
 
 import org.letsbuildrockets.libs.ColorSensor;
@@ -10,15 +12,17 @@ import org.letsbuildrockets.libs.ColorSensor;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.RobotMap;
 
 
 
-public class ColorSensorSubsystem extends Subsystem {
+public class WheelOfFortuneContestant extends Subsystem {
 
+  VictorSPX motor;
   ColorSensor colorsensor;
   double rot;
   String initColor;
-  String currentColor;
+  boolean countTrigger;
 
   public static final Color Blue = ColorMatch.makeColor(0.153, 0.445, 0.402);
   public static final Color Green = ColorMatch.makeColor(0.196, 0.557, 0.246);
@@ -26,11 +30,12 @@ public class ColorSensorSubsystem extends Subsystem {
   public static final Color Yellow = ColorMatch.makeColor(0.319, 0.545, 0.136);
   public static final Color Black = ColorMatch.makeColor(0,0,0);
 
-  public ColorSensorSubsystem() {
+  public WheelOfFortuneContestant() {
+    motor = new VictorSPX(RobotMap.motor1);
     colorsensor = new ColorSensor();
     rot = 0;
     initColor = getColor();
-    currentColor = getColor();
+    countTrigger = false;
   }
 
   public String getColor() {
@@ -53,9 +58,9 @@ public class ColorSensorSubsystem extends Subsystem {
   }
 
   public boolean compareColors(Color a, Color b) {
-    if ((a.red < b.red + 0.02) && (a.red > b.red - 0.02)) {
-      if ((a.green < b.green + 0.02) && (a.green > b.green - 0.02)) {
-        if ((a.blue < b.blue + 0.02) && (a.blue > b.blue - 0.02)) {
+    if ((a.red < b.red + 0.045) && (a.red > b.red - 0.045)) {
+      if ((a.green < b.green + 0.045) && (a.green > b.green - 0.045)) {
+        if ((a.blue < b.blue + 0.045) && (a.blue > b.blue - 0.045)) {
           return true;
         }
       } 
@@ -67,13 +72,26 @@ public class ColorSensorSubsystem extends Subsystem {
     if (initColor == "No Color") {
       initColor = getColor();
       return 0;
-    }
-    if (currentColor != getColor()) {
-      currentColor = getColor();
-      rot+=0.125;
-      return rot;
+    } else if (initColor != getColor()) {
+      countTrigger = true;
+    } else if (getColor() == initColor && countTrigger) {
+      rot+=0.5;
+      countTrigger = false;
     }
     return rot;
+  }
+
+  public boolean rotationControl() {
+    if (getRotations() < 3) {
+      motor.set(ControlMode.PercentOutput, 1);
+      return false;
+    }
+    motor.set(ControlMode.PercentOutput, 0);
+    return true;
+  }
+
+  public void positionControl() {
+
   }
 
   public void initDefaultCommand () {

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.ColorSensorSubsystem;
+import frc.robot.subsystems.WheelOfFortuneContestant;
 import frc.robot.subsystems.MotorSubsystem;
 import frc.robot.subsystems.TimeOfFlight;
 
@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static MotorSubsystem motorSubsystem;
   public static TimeOfFlight timeofflight;
-  public static ColorSensorSubsystem colorsensor;
+  public static WheelOfFortuneContestant contestant;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
     motorSubsystem = new MotorSubsystem();
     timeofflight = new TimeOfFlight();
-    colorsensor = new ColorSensorSubsystem();
+    contestant = new WheelOfFortuneContestant();
   }
 
   /**
@@ -56,10 +56,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("TOF 1 Distance", timeofflight.getDistance1());
     SmartDashboard.putNumber("TOF 2 Distance", timeofflight.getDistance2());
     SmartDashboard.putNumber("Number of Balls In Mechanism", timeofflight.getCounter());
-    SmartDashboard.putNumber("WoF Rotations", colorsensor.getRotations());
+    SmartDashboard.putNumber("WoF Rotations", contestant.getRotations());
     SmartDashboard.putString("TOF 1 Edge", timeofflight.getEdge1());
     SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
-    SmartDashboard.putString("Color Match", colorsensor.getColor());
+    SmartDashboard.putString("Color Match", contestant.getColor());
     SmartDashboard.putString("Intake Motor State", timeofflight.moveMotor());
   }
   /**
