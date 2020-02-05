@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("TOF 1 Distance", timeofflight.getDistance1());
     SmartDashboard.putNumber("TOF 2 Distance", timeofflight.getDistance2());
     SmartDashboard.putNumber("Number of Balls In Mechanism", timeofflight.getCounter());
+    SmartDashboard.putNumber("WoF Rotations", colorsensor.getRotations());
     SmartDashboard.putString("TOF 1 Edge", timeofflight.getEdge1());
     SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
     SmartDashboard.putString("Color Match", colorsensor.getColor());

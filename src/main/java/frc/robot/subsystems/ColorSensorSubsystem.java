@@ -16,6 +16,10 @@ import edu.wpi.first.wpilibj.util.Color;
 public class ColorSensorSubsystem extends Subsystem {
 
   ColorSensor colorsensor;
+  double rot;
+  String initColor;
+  String currentColor;
+
   public static final Color Blue = ColorMatch.makeColor(0.153, 0.445, 0.402);
   public static final Color Green = ColorMatch.makeColor(0.196, 0.557, 0.246);
   public static final Color Red = ColorMatch.makeColor(0.475, 0.371, 0.153);
@@ -24,6 +28,9 @@ public class ColorSensorSubsystem extends Subsystem {
 
   public ColorSensorSubsystem() {
     colorsensor = new ColorSensor();
+    rot = 0;
+    initColor = getColor();
+    currentColor = getColor();
   }
 
   public String getColor() {
@@ -54,6 +61,19 @@ public class ColorSensorSubsystem extends Subsystem {
       } 
     }
     return false;
+  }
+
+  public double getRotations() {
+    if (initColor == "No Color") {
+      initColor = getColor();
+      return 0;
+    }
+    if (currentColor != getColor()) {
+      currentColor = getColor();
+      rot+=0.125;
+      return rot;
+    }
+    return rot;
   }
 
   public void initDefaultCommand () {
