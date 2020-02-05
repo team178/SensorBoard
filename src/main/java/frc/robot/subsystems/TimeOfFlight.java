@@ -91,9 +91,4 @@ public class TimeOfFlight extends SubsystemBase {
   public int getCounter() {
     return counter;
   }
-
-  @Override
-  public void periodic() {
-    
-  }
 }
