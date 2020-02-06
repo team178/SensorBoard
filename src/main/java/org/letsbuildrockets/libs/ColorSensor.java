@@ -47,8 +47,4 @@ public class ColorSensor {
     public int getIR() {
         return colorsensor.getIR();
     }
-
-    public void printRgbValues() {
-        
-    }
 }
