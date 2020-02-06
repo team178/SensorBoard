@@ -61,11 +61,13 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
     SmartDashboard.putString("Color Match", contestant.getColor());
     SmartDashboard.putString("Intake Motor State", timeofflight.moveMotor());
+    SmartDashboard.putBoolean("Rotation Control", contestant.rotationControl(4));
   }
   /**
    * This autonomous (along with the chooser code above) shows how to select
    * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
+   * chooser code works with the Java Smart
+   * Dashboard. If you prefer the
    * LabVIEW Dashboard, remove all of the chooser code and uncomment the
    * getString line to get the auto name from the text box below the Gyro
    *
