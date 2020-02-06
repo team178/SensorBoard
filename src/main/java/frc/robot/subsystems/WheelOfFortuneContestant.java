@@ -81,8 +81,8 @@ public class WheelOfFortuneContestant extends Subsystem {
     return rot;
   }
 
-  public boolean rotationControl() {
-    if (getRotations() < 3) {
+  public boolean rotationControl(int desiredRotations) {
+    if (getRotations() < desiredRotations) {
       motor.set(ControlMode.PercentOutput, 1);
       return false;
     }
