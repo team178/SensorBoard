@@ -9,6 +9,7 @@ import com.revrobotics.ColorMatch;
 
 import org.letsbuildrockets.libs.ColorSensor;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -29,6 +30,7 @@ public class WheelOfFortuneContestant extends Subsystem {
   public static final Color Red = ColorMatch.makeColor(0.475, 0.371, 0.153);
   public static final Color Yellow = ColorMatch.makeColor(0.319, 0.545, 0.136);
   public static final Color Black = ColorMatch.makeColor(0,0,0);
+  private String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
   public WheelOfFortuneContestant() {
     motor = new VictorSPX(RobotMap.motor1);
@@ -36,6 +38,27 @@ public class WheelOfFortuneContestant extends Subsystem {
     rot = 0;
     initColor = getColor();
     countTrigger = false;
+  }
+
+  public String getGameData() {
+    if(gameData.length() > 0) {
+      if(gameData.charAt(0) == 'B') {
+        return "Blue";
+      }
+
+      if(gameData.charAt(0) == 'G') {
+        return "Green";
+      }
+
+      if(gameData.charAt(0) == 'R') {
+        return "Red";
+      }
+
+      if(gameData.charAt(0) == 'Y') {
+        return "Yellow";
+      }
+    }
+    return "No color";
   }
 
   public String getColor() {
@@ -90,8 +113,13 @@ public class WheelOfFortuneContestant extends Subsystem {
     return true;
   }
 
-  public void positionControl() {
-
+  public boolean positionControl() {
+    if (getGameData() == getColor()) {
+      motor.set(ControlMode.PercentOutput, 0.5);
+      return true;
+    }
+    motor.set(ControlMode.PercentOutput, 0);
+    return false;
   }
 
   public void initDefaultCommand () {
