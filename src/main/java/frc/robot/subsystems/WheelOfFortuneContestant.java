@@ -22,7 +22,7 @@ public class WheelOfFortuneContestant extends Subsystem {
   VictorSPX motor;
   ColorSensor colorsensor;
   double rot;
-  String initColor;
+  char initColor;
   boolean countTrigger;
 
   public static final Color Blue = ColorMatch.makeColor(0.153, 0.445, 0.402);
@@ -40,28 +40,28 @@ public class WheelOfFortuneContestant extends Subsystem {
     countTrigger = false;
   }
 
-  public String getGameData() {
+  public char getGameData() {
     if(gameData.length() > 0) {
       if(gameData.charAt(0) == 'B') {
-        return "Blue";
+        return 'B';
       }
 
       if(gameData.charAt(0) == 'G') {
-        return "Green";
+        return 'G';
       }
 
       if(gameData.charAt(0) == 'R') {
-        return "Red";
+        return 'R';
       }
 
       if(gameData.charAt(0) == 'Y') {
-        return "Yellow";
+        return 'Y';
       }
     }
-    return "No color";
+    return 'N';
   }
 
-  public String getColor() {
+  public char getColor() {
     Color c = colorsensor.detectColor();
     //System.out.println("Red: " + c.red);
     //System.out.println("Green: " + c.green);
@@ -70,14 +70,14 @@ public class WheelOfFortuneContestant extends Subsystem {
     SmartDashboard.putNumber("Green", c.green);
     SmartDashboard.putNumber("Blue", c.blue);
     if (compareColors(c, Blue))
-      return "Blue";
+      return 'B';
     if (compareColors(c, Green))
-      return "Green";
+      return 'G';
     if (compareColors(c, Red))
-      return "Red";
+      return 'R';
     if (compareColors(c, Yellow))
-      return "Yellow";
-    return "No Color";
+      return 'Y';
+    return 'N';
   }
 
   public boolean compareColors(Color a, Color b) {
@@ -92,7 +92,7 @@ public class WheelOfFortuneContestant extends Subsystem {
   }
 
   public double getRotations() {
-    if (initColor == "No Color") {
+    if (initColor == 'N') {
       initColor = getColor(); //This might not work, only becuase the initColor would need to be a consistant one color.
       return 0;               //The rot value counts the times that it sees one color and creates the rot value
     } else if (initColor != getColor()) {
@@ -114,7 +114,7 @@ public class WheelOfFortuneContestant extends Subsystem {
   }
 
   public boolean positionControl() {
-    if (getGameData() == getColor()) {
+    if (getRandomColor() == getColor()) { //getGameData() used when finished testing
       motor.set(ControlMode.PercentOutput, 0.5);
       return true;
     }
@@ -122,30 +122,32 @@ public class WheelOfFortuneContestant extends Subsystem {
     return false;
   }
 
-  public String getRandomColor() {
-    double randNum = Math.random();
-    if(randNum <= 0.2475)
-    {
-      return "blue";
-    }
-    else if(randNum <= 0.495 && randNum > 0.2475)
-    {
-      return "red";
-    }
-    else if(randNum <= 0.7425 && randNum > 0.495)
-    {
-      return "green";
-    }
-    else
-    {
-      return "yellow";
-    }
-    }
-    }
-  }
+  public char getRandomColor() {
+    char[] colors = {'B', 'R', 'G', 'Y'};
+    //random number from 0-3
+    return colors[(int) (Math.random() * 4)];
   }
 
-  public void initDefaultCommand () {
+  public void initDefaultCommand() {
 
+  }
+
+  public String getColorinShuffleboard() { //method for shuffleboard printing as it will not work for char
+    Color c = colorsensor.detectColor();
+    //System.out.println("Red: " + c.red);
+    //System.out.println("Green: " + c.green);
+    //System.out.println("Blue: " + c.blue);
+    SmartDashboard.putNumber("Red", c.red);
+    SmartDashboard.putNumber("Green", c.green);
+    SmartDashboard.putNumber("Blue", c.blue);
+    if (compareColors(c, Blue))
+      return "Blue";
+    if (compareColors(c, Green))
+      return "Green";
+    if (compareColors(c, Red))
+      return "Red";
+    if (compareColors(c, Yellow))
+      return "Yellow";
+    return "No Color";
   }
 }

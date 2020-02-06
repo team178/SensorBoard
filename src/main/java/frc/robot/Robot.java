@@ -59,9 +59,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("WoF Rotations", contestant.getRotations());
     SmartDashboard.putString("TOF 1 Edge", timeofflight.getEdge1());
     SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
-    SmartDashboard.putString("Color Match", contestant.getColor());
+    SmartDashboard.putString("Color Match", contestant.getColorinShuffleboard());
     SmartDashboard.putString("Intake Motor State", timeofflight.moveMotor());
     SmartDashboard.putBoolean("Rotation Control", contestant.rotationControl(4));
+    SmartDashboard.putBoolean("Position Control", contestant.positionControl());
   }
   /**
    * This autonomous (along with the chooser code above) shows how to select
