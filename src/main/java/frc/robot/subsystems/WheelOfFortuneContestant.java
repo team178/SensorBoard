@@ -61,7 +61,7 @@ public class WheelOfFortuneContestant extends Subsystem {
     return 'N';
   }
 
-  public char getColor() {
+  public char getColor() { //must be 3.5in away or closer
     Color c = colorsensor.detectColor();
     //System.out.println("Red: " + c.red);
     //System.out.println("Green: " + c.green);
