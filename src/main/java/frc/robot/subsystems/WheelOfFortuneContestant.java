@@ -70,8 +70,8 @@ public class WheelOfFortuneContestant extends Subsystem {
 
   public double getRotations() {
     if (initColor == "No Color") {
-      initColor = getColor();
-      return 0;
+      initColor = getColor(); //This might not work, only becuase the initColor would need to be a consistant one color.
+      return 0;               //The rot value counts the times that it sees one color and creates the rot value
     } else if (initColor != getColor()) {
       countTrigger = true;
     } else if (getColor() == initColor && countTrigger) {
