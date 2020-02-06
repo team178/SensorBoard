@@ -22,6 +22,7 @@ public class WheelOfFortuneContestant extends Subsystem {
   VictorSPX motor;
   ColorSensor colorsensor;
   double rot;
+  char randomColor;
   char initColor;
   boolean countTrigger;
 
@@ -36,6 +37,7 @@ public class WheelOfFortuneContestant extends Subsystem {
     motor = new VictorSPX(RobotMap.motor1);
     colorsensor = new ColorSensor();
     rot = 0;
+    randomColor = getRandomColor();
     initColor = getColor();
     countTrigger = false;
   }
@@ -114,7 +116,7 @@ public class WheelOfFortuneContestant extends Subsystem {
   }
 
   public boolean positionControl() {
-    if (getRandomColor() == getColor()) { //getGameData() used when finished testing
+    if (randomColor == getColor()) { //getGameData() used when finished testing
       motor.set(ControlMode.PercentOutput, 0.5);
       return true;
     }
