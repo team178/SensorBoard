@@ -122,6 +122,29 @@ public class WheelOfFortuneContestant extends Subsystem {
     return false;
   }
 
+  public String getRandomColor() {
+    double randNum = Math.random();
+    if(randNum <= 0.2475)
+    {
+      return "blue";
+    }
+    else if(randNum <= 0.495 && randNum > 0.2475)
+    {
+      return "red";
+    }
+    else if(randNum <= 0.7425 && randNum > 0.495)
+    {
+      return "green";
+    }
+    else
+    {
+      return "yellow";
+    }
+    }
+    }
+  }
+  }
+
   public void initDefaultCommand () {
 
   }
