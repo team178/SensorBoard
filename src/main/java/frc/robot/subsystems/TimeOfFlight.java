@@ -26,14 +26,16 @@ public class TimeOfFlight extends SubsystemBase {
 
   private TimeOfFlightSensor tof1;
   private TimeOfFlightSensor tof2;
+  private TimeOfFlightSensor tof3;
   private VictorSPX motor;
-  private int counter;
+  protected int counter;
   private boolean inTrigger;
   private boolean outTrigger;
 
   public TimeOfFlight() {
     tof1 = new TimeOfFlightSensor(0x0620);
     tof2 = new TimeOfFlightSensor(0x0621);
+    tof3 = new TimeOfFlightSensor(0x0622);
     motor = new VictorSPX(RobotMap.motor1);
     counter = 0;
     inTrigger = true;
@@ -48,12 +50,20 @@ public class TimeOfFlight extends SubsystemBase {
     return tof2.getD();
   }
 
+  public double getDistance3() {
+    return tof3.getD();
+  }
+
   public String getEdge1() {
     return tof1.getEdge();
   }
 
   public String getEdge2() {
     return tof2.getEdge();
+  }
+
+  public String getEdge3() {
+    return tof3.getEdge();
   }
 
   public void addToCounter() {
@@ -66,26 +76,35 @@ public class TimeOfFlight extends SubsystemBase {
     }
   }
 
+  public String ballMovement() {
+    String direction = null;
+    if (tof1.getEdge() == "Trailing" && tof2.getEdge() == "Leading") {
+       direction = "forwards";
+    }
+    return direction;
+  }
+
   public void removeFromCounter() {
-    if (tof2.getEdge() == "Leading" && !outTrigger) {
+    if (tof3.getEdge() == "Leading" && !outTrigger) {
       outTrigger = true;
     }
-    if (tof2.getEdge() == "No ball" && outTrigger) {
+    if (tof3.getEdge() == "No ball" && outTrigger) {
       counter--;
       outTrigger = false;
     }
   }
 
   public String moveMotor() {
+    String state = null;
     if (getEdge1() == "Leading") {
       motor.set(ControlMode.PercentOutput, 1);
-      return "Moving";
+      state = "Moving";
     } else if (getEdge2() == "Trailing") {
       motor.set(ControlMode.PercentOutput, 0);
       System.out.println("stopped");
-      return "Not Moving";
+      state = "Not Moving";
     }
-    return "Previous State";
+    return state;
   }
 
   public int getCounter() {
