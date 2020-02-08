@@ -60,8 +60,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("TOF 1 Edge", timeofflight.getEdge1());
     SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
     SmartDashboard.putString("TOF 3 Edge", timeofflight.getEdge3());
+    SmartDashboard.putString("Direction of Ball", timeofflight.ballMovement());
+    SmartDashboard.putString("Full?", timeofflight.maximumCapacity());
     SmartDashboard.putString("Color Match", contestant.getColorinShuffleboard());
-    SmartDashboard.putString("Intake Motor State", timeofflight.moveMotor());
+    SmartDashboard.putString("Intake Motor State", timeofflight.moveMotorNew());
     SmartDashboard.putBoolean("Rotation Control", contestant.rotationControl(4));
     SmartDashboard.putBoolean("Position Control", contestant.positionControl());
   }
