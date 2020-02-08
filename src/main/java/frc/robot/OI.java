@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.RobotMap;
 //import frc.robot.commands.GetTofDistance;
-import frc.robot.commands.MoveMotor;
+//import frc.robot.commands.MoveMotor;
 
 /**
  * Add your docs here.
