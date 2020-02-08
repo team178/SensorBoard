@@ -83,7 +83,7 @@ public class TimeOfFlight extends SubsystemBase {
     }
     try {
     return direction;
-    } catch (java.lang.NullPointerException) {
+    } catch(java.lang.NullPointerException nPointerException) {
       return "No Direction";
     }
   }
