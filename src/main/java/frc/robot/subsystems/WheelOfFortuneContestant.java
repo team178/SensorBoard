@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.RobotMap;
 /**
- * @author Even Czerwinski
+ * @author Evan Czerwinski
  * @author Varun Chamarty
  * @author Robbie Fishel
  * @version 4.0
