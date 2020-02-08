@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.WheelOfFortuneContestant;
 import frc.robot.subsystems.MotorSubsystem;
+import frc.robot.subsystems.TestWheelOfFortuneContestant;
 import frc.robot.subsystems.TimeOfFlight;
 
 /**
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
   public static MotorSubsystem motorSubsystem;
   public static TimeOfFlight timeofflight;
   public static WheelOfFortuneContestant contestant;
+  public static TestWheelOfFortuneContestant testContestant;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -38,6 +40,7 @@ public class Robot extends TimedRobot {
     motorSubsystem = new MotorSubsystem();
     timeofflight = new TimeOfFlight();
     contestant = new WheelOfFortuneContestant();
+    testContestant = new TestWheelOfFortuneContestant();
   }
 
   /**
@@ -56,7 +59,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("TOF 2 Distance", timeofflight.getDistance2());
     SmartDashboard.putNumber("TOF 3 Distance", timeofflight.getDistance3());
     SmartDashboard.putNumber("Number of Balls In Mechanism", timeofflight.getCounter());
-    SmartDashboard.putNumber("WoF Rotations", contestant.getRotations());
+    SmartDashboard.putNumber("WoF Rotations", testContestant.getRotations());
     SmartDashboard.putString("TOF 1 Edge", timeofflight.getEdge1());
     SmartDashboard.putString("TOF 2 Edge", timeofflight.getEdge2());
     SmartDashboard.putString("TOF 3 Edge", timeofflight.getEdge3());
@@ -66,6 +69,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("Intake Motor State", timeofflight.moveMotorNew());
     SmartDashboard.putBoolean("Rotation Control", contestant.rotationControl(4));
     SmartDashboard.putBoolean("Position Control", contestant.positionControl());
+    SmartDashboard.putString("Color Match", testContestant.testGetColorinShuffleboard());
+    SmartDashboard.putString("Intake Motor State", timeofflight.moveMotorNew());
+    SmartDashboard.putBoolean("Rotation Control", testContestant.rotationControl(4));
+    SmartDashboard.putBoolean("Position Control", testContestant.positionControl());
   }
   /**
    * This autonomous (along with the chooser code above) shows how to select
