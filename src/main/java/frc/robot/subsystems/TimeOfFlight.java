@@ -45,26 +45,50 @@ public class TimeOfFlight extends SubsystemBase {
     outTrigger = false;
   }
 
+  
+  /** 
+   * @return double
+   */
   public double getDistance1() {
     return tof1.getD();
   }
 
+  
+  /** 
+   * @return double
+   */
   public double getDistance2() {
     return tof2.getD();
   }
 
+  
+  /** 
+   * @return double
+   */
   public double getDistance3() {
     return tof3.getD();
   }
 
+  
+  /** 
+   * @return String
+   */
   public String getEdge1() {
     return tof1.getEdge();
   }
 
+  
+  /** 
+   * @return String
+   */
   public String getEdge2() {
     return tof2.getEdge();
   }
 
+  
+  /** 
+   * @return String
+   */
   public String getEdge3() {
     return tof3.getEdge();
   }
@@ -79,6 +103,10 @@ public class TimeOfFlight extends SubsystemBase {
     }
   }
 
+  
+  /** 
+   * @return String
+   */
   public String ballMovement() {
     String direction = null;
     if (tof1.getEdge() == "Trailing" && tof2.getEdge() == "Leading") {
@@ -101,6 +129,10 @@ public class TimeOfFlight extends SubsystemBase {
     }
   }
 
+  
+  /** 
+   * @return String
+   */
   public String moveMotor() {
     String state = "no ball";
     if (getEdge1() == "Leading") {
@@ -114,6 +146,10 @@ public class TimeOfFlight extends SubsystemBase {
     return state;
   }
 
+  
+  /** 
+   * @return int
+   */
   public int getCounter() {
     return counter;
   }

@@ -82,6 +82,10 @@ public class WheelOfFortuneContestant extends Subsystem {
     return 'N';
   }
 
+  
+  /** 
+   * @return char
+   */
   /*
   * Method to get the current sensed color
   */
@@ -183,6 +187,10 @@ public class WheelOfFortuneContestant extends Subsystem {
     return colors[(int) (Math.random() * 4)]; //random number from 0-3
   }
 
+  
+  /** 
+   * @param getColorinShuffleboard(
+   */
   public void initDefaultCommand() { //not used yet - needs to be here though
   }
 
