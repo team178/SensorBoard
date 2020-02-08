@@ -12,6 +12,14 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.RobotMap;
+/**
+ * @author Even Czerwinski
+ * @author Varun Chamarty
+ * @author Robbie Fishel
+ * @version 4.0
+ * @since 2020.1.2
+ * 
+ */
 
 
 
@@ -47,11 +55,12 @@ public class WheelOfFortuneContestant extends Subsystem {
     countTrigger = false;
   }
 
-  /*
-  * Method used to get the game data
-  * Game gives us a color as a String and this method returns this data
-  * Returns as char to keep data types consistant
+  /** 
+   * @return 'B' is the string that we get from the game
+   * Method used to get the game data
+   * 
   */
+  
   public char getGameData() {
     if(gameData.length() > 0) {
       if(gameData.charAt(0) == 'B') {
@@ -92,7 +101,11 @@ public class WheelOfFortuneContestant extends Subsystem {
     return 'N';
   }
 
-  /*
+  /** Desired color in comparison from what we are seeing.
+   * @param Color a  takes the color value of what the sensor senses
+   * @param Color b  takes the color of the color we sense
+   * @return  A boolean variable stating whether what color we want is in a tolerable range to be considered the right color
+   * 
   * Method that uses ranges to determine whether the color we are sensing is similar to the colors we tested
   */
   public boolean compareColors(Color a, Color b) {
@@ -106,9 +119,12 @@ public class WheelOfFortuneContestant extends Subsystem {
     return false;
   }
 
-  /*
-  * Method that returns the number of rotations the color wheel has made
-  */
+    /** Gets rotations of the wheel
+     * @return rotation values 
+    * 
+    * Method that returns the number of 
+    *  rotations the color wheel has made
+    */
   public double getRotations() {
     if (initColor == 'N') {
       initColor = getColor(); //This might not work, only becuase the initColor would need to be a consistant one color.
@@ -123,10 +139,15 @@ public class WheelOfFortuneContestant extends Subsystem {
     return rot;
   }
 
-  /*
-  * Method that uses motor control to rotate the color wheel
-  * Detects when the wheel has spun enough times in order to stop automatically
-  */
+  /**
+   * @param int desiredRotations  indicates how many times 
+   * control panal should spin
+   * @return boolean depending on whether rotation criteria has been met
+   * 
+   * Method that uses motor control to rotate the color wheel
+   * Detects when the wheel has spun enough times in order to stop automatically
+   */
+  
   public boolean rotationControl(int desiredRotations) {
     if (getRotations() < desiredRotations) {
       motor.set(ControlMode.PercentOutput, 1);
@@ -136,8 +157,10 @@ public class WheelOfFortuneContestant extends Subsystem {
     return true;
   }
 
-  /*
-  * Method that uses the game data to determine whether the current color is the same as the color the robot needs to spin the wheel to
+  /** 
+   * @return boolean depending on whether game data is equal to detected color
+   * Method that uses the game data to determine whether the current 
+   * color is the same as the color the robot needs to spin the wheel to
   */
   public boolean positionControl() {
     if (randomColor == getColor()) { //getGameData() used when finished testing
@@ -148,10 +171,13 @@ public class WheelOfFortuneContestant extends Subsystem {
     return false;
   }
 
-  /*
-  * Temporary method that chooses a random color
+  /**
+   * @return random color value
+   * 
+   * Temporary method that chooses a random color
   * Used for testing as if we were receiving a random color from the game data
-  */
+   */
+
   public char getRandomColor() {
     char[] colors = {'B', 'R', 'G', 'Y'};  
     return colors[(int) (Math.random() * 4)]; //random number from 0-3
@@ -160,8 +186,11 @@ public class WheelOfFortuneContestant extends Subsystem {
   public void initDefaultCommand() { //not used yet - needs to be here though
   }
 
-  /*
-  * Method for shuffleboard to print the current color as it will not work for type char
+  /** 
+   * @return SmartDashboard Strings that are displayed
+   * 
+   * Method for shuffleboard to print the current
+   *  color as it will not work for type char
   */
   public String getColorinShuffleboard() { 
     Color c = colorsensor.detectColor();
@@ -178,4 +207,8 @@ public class WheelOfFortuneContestant extends Subsystem {
       return "Yellow";
     return "No Color";
   }
+  
+    
 }
+
+

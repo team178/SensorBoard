@@ -15,6 +15,13 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import org.letsbuildrockets.libs.TimeOfFlightSensor;
 
+/**
+ * @author Robbie Fishel
+ * @author Ronit Banerjee
+ * @version 1.0
+ * @since 2020.1.2
+ * 
+ */
 
 public class TimeOfFlight extends SubsystemBase {
 
@@ -26,11 +33,13 @@ public class TimeOfFlight extends SubsystemBase {
   private boolean inTrigger;
   private boolean outTrigger;
 
+
+
   public TimeOfFlight() {
-    tof1 = new TimeOfFlightSensor(0x0620);
+    tof1 = new TimeOfFlightSensor(0x0620);   
     tof2 = new TimeOfFlightSensor(0x0621);
-    tof3 = new TimeOfFlightSensor(0x0624);
-    motor = new VictorSPX(RobotMap.motor1);
+    tof3 = new TimeOfFlightSensor(0x0624); 
+    motor = new VictorSPX(RobotMap.motor1); 
     counter = 0;
     inTrigger = true;
     outTrigger = false;
