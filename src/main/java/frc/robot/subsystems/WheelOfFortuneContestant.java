@@ -22,6 +22,7 @@ public class WheelOfFortuneContestant extends Subsystem {
   VictorSPX motor;
   ColorSensor colorsensor;
   double rot;
+  char randomColor;
   char initColor;
   boolean countTrigger;
 
@@ -36,6 +37,7 @@ public class WheelOfFortuneContestant extends Subsystem {
     motor = new VictorSPX(RobotMap.motor1);
     colorsensor = new ColorSensor();
     rot = 0;
+    randomColor = getRandomColor();
     initColor = getColor();
     countTrigger = false;
   }
@@ -63,9 +65,6 @@ public class WheelOfFortuneContestant extends Subsystem {
 
   public char getColor() {
     Color c = colorsensor.detectColor();
-    //System.out.println("Red: " + c.red);
-    //System.out.println("Green: " + c.green);
-    //System.out.println("Blue: " + c.blue);
     SmartDashboard.putNumber("Red", c.red);
     SmartDashboard.putNumber("Green", c.green);
     SmartDashboard.putNumber("Blue", c.blue);
@@ -95,11 +94,12 @@ public class WheelOfFortuneContestant extends Subsystem {
     if (initColor == 'N') {
       initColor = getColor(); //This might not work, only becuase the initColor would need to be a consistant one color.
       return 0;               //The rot value counts the times that it sees one color and creates the rot value
-    } else if (initColor != getColor()) {
-      countTrigger = true;
-    } else if (getColor() == initColor && countTrigger) {
-      rot+=0.5;
-      countTrigger = false;
+    } else {
+      countTrigger = initColor != getColor();
+    } 
+      if(getColor() == initColor && countTrigger) {
+        rot+=0.5;
+        countTrigger = false;
     }
     return rot;
   }
@@ -114,7 +114,7 @@ public class WheelOfFortuneContestant extends Subsystem {
   }
 
   public boolean positionControl() {
-    if (getRandomColor() == getColor()) { //getGameData() used when finished testing
+    if (randomColor == getColor()) { //getGameData() used when finished testing and ready for competition
       motor.set(ControlMode.PercentOutput, 0.5);
       return true;
     }
@@ -123,20 +123,15 @@ public class WheelOfFortuneContestant extends Subsystem {
   }
 
   public char getRandomColor() {
-    char[] colors = {'B', 'R', 'G', 'Y'};
-    //random number from 0-3
-    return colors[(int) (Math.random() * 4)];
+    char[] colors = {'B', 'R', 'G', 'Y'};  
+    return colors[(int) (Math.random() * 4)]; //random number from 0-3
   }
 
-  public void initDefaultCommand() {
-
+  public void initDefaultCommand() { //not used yet - needs to be here tho
   }
 
-  public String getColorinShuffleboard() { //method for shuffleboard printing as it will not work for char
+  public String getColorinShuffleboard() { //method for shuffleboard printing a string as it will not work for type char
     Color c = colorsensor.detectColor();
-    //System.out.println("Red: " + c.red);
-    //System.out.println("Green: " + c.green);
-    //System.out.println("Blue: " + c.blue);
     SmartDashboard.putNumber("Red", c.red);
     SmartDashboard.putNumber("Green", c.green);
     SmartDashboard.putNumber("Blue", c.blue);
