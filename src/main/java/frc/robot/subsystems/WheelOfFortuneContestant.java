@@ -114,7 +114,11 @@ public class WheelOfFortuneContestant extends Subsystem {
   }
 
   public boolean positionControl() {
+<<<<<<< HEAD
     if (randomColor == getColor()) { //getGameData() used when finished testing and ready for competition
+=======
+    if (randomColor == getColor()) { //getGameData() used when finished testing
+>>>>>>> master
       motor.set(ControlMode.PercentOutput, 0.5);
       return true;
     }
