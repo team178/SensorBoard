@@ -7,7 +7,6 @@
 
 package org.letsbuildrockets.libs;
 
-import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
