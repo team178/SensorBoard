@@ -16,12 +16,12 @@ public class RobotMap {
     public static int motor1 = 2;
 
     //DIO
-    public static int limitSwitch = 0;
+    public static int limitSwitch = 11;
     public static int bit1 = 3;
     public static int bit2 = 4;
     public static int bit3 = 5;
     public static int bit4 = 6;
-    public static int contestant = 11;
+    public static int contestant = 0;
 
     //CAN - Temporary values
     public static int tofInput = 7;
