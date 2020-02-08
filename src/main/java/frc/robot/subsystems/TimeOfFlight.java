@@ -81,7 +81,11 @@ public class TimeOfFlight extends SubsystemBase {
     if (tof1.getEdge() == "Trailing" && tof2.getEdge() == "Leading") {
        direction = "forwards";
     }
+    try {
     return direction;
+    } catch (java.lang.NullPointerException) {
+      return "No Direction";
+    }
   }
 
   public void removeFromCounter() {
