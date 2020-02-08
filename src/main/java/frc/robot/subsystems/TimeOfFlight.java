@@ -35,7 +35,7 @@ public class TimeOfFlight extends SubsystemBase {
   public TimeOfFlight() {
     tof1 = new TimeOfFlightSensor(0x0620);
     tof2 = new TimeOfFlightSensor(0x0621);
-    tof3 = new TimeOfFlightSensor(0x0622);
+    tof3 = new TimeOfFlightSensor(0x0624);
     motor = new VictorSPX(RobotMap.motor1);
     counter = 0;
     inTrigger = true;
@@ -95,7 +95,7 @@ public class TimeOfFlight extends SubsystemBase {
   }
 
   public String moveMotor() {
-    String state = null;
+    String state = "no ball";
     if (getEdge1() == "Leading") {
       motor.set(ControlMode.PercentOutput, 1);
       state = "Moving";
