@@ -139,8 +139,23 @@ public class TimeOfFlight extends SubsystemBase {
       outTrigger = false;
     }
   }
-  
+ //* liza for button:
+ // public String motorMovementString
+ // import MotorSubsystem.java (?) to establish connection with the talon master motors
+ // if (tof1.getEdge().equals("Leading")
+    //enable motor -* ButtonPressed = true *
+    //run until it reaches tof2 (tof2.getEdge().equals("Leading")
+    //disable it until the next ball rolls in -* ButtonPressed = !true
+
+    //* liza for dumpball:
+    // public String dumpBallOut
+    // import the necessary subsystem to establish connection with the talon motors ()
+    // enable when ballcount reaches "Maximum Capacity!" & when the ball triggers off the last tof sensor
+    // if (tof3.getEdge().equals("Center"))
+    // shoot the ball out - because if it is located at the end, it should be shot out logically I think 
+
 /**
+ *
    * Method that runs motor based on ball location
    * @return String that indicates location of ball
    */
@@ -173,7 +188,7 @@ public class TimeOfFlight extends SubsystemBase {
       status = "Moving";
     }
     */
-
+// what is the purpose of the comment above? delete if not needed; runs fine without it based on the test - liza
     if (buttonPressed) {
       motor.set(ControlMode.PercentOutput, 1);
       status = "Moving";
@@ -230,6 +245,10 @@ public class TimeOfFlight extends SubsystemBase {
     - Make motor on Sensor Board MOVE based off of the status of variable "status" in moveMotorNew method
     - Make a dumpBall method, activated by a separate button, that runs the motor 
       - if not max capacity, run until next ball triggers max capacity, then run the motor again, etc. (increments) 
-    - Shift down time of flight, for clearance stop ball at trailing edge of secon ToF
+    - Shift down time of flight, for clearance stop ball at trailing edge of second ToF
+    (updated 2/10/2020):
+    - turn comments into actual code for the button to enable/disable the motor
+    - turn comments into actual code for the dumpball method
+    - I'm :/ - liza
   */
   }
