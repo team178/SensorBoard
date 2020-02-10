@@ -160,6 +160,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
         if(initColor != 'N' && initColor == getColor() && halfRotation) { //checks for the init color again
           rot += 0.5; //add to rotation value as all reqs have been met
           halfRotation = false; //resets rotation variable until wheel spins back to the same color.
+          return rot; //returns rotations early
       }
     }
     return rot; //return current rotaions
