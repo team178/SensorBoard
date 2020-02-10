@@ -67,12 +67,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("Full?", timeofflight.maximumCapacity());
     SmartDashboard.putString("Color Match", contestant.getColorinShuffleboard());
     SmartDashboard.putString("Intake Motor State", timeofflight.moveMotorNew());
-    SmartDashboard.putBoolean("Rotation Control", contestant.rotationControl(4));
-    SmartDashboard.putBoolean("Position Control", contestant.positionControl());
+    //SmartDashboard.putBoolean("Rotation Control", contestant.rotationControl(4));
+    SmartDashboard.putBoolean("Position Control", testContestant.positionControl());
     SmartDashboard.putString("Color Match", testContestant.testGetColorinShuffleboard());
     SmartDashboard.putString("Intake Motor State", timeofflight.moveMotorNew());
-    SmartDashboard.putBoolean("Rotation Control", testContestant.rotationControl(4));
-    SmartDashboard.putBoolean("Position Control", testContestant.positionControl());
+    SmartDashboard.putBoolean("Rotation Control e", testContestant.rotationControl(4));
   }
   /**
    * This autonomous (along with the chooser code above) shows how to select

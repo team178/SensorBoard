@@ -137,7 +137,7 @@ public class WheelOfFortuneContestant extends Subsystem {
       countTrigger = initColor != getColor();
     } 
       if(getColor() == initColor && countTrigger) {
-        rot+=0.5;
+        rot += 0.5;
         countTrigger = false;
     }
     return rot;

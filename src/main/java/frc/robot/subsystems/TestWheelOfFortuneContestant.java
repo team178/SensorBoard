@@ -60,23 +60,23 @@ public class TestWheelOfFortuneContestant extends Subsystem {
    * Method used to get the game data
    * 
   */
-  
+
   public char getGameData() {
     if(gameData.length() > 0) {
       if(gameData.charAt(0) == 'B') {
-        return 'B';
-      }
-
-      if(gameData.charAt(0) == 'G') {
-        return 'G';
-      }
-
-      if(gameData.charAt(0) == 'R') {
         return 'R';
       }
 
-      if(gameData.charAt(0) == 'Y') {
+      if(gameData.charAt(0) == 'G') {
         return 'Y';
+      }
+
+      if(gameData.charAt(0) == 'R') {
+        return 'B';
+      }
+
+      if(gameData.charAt(0) == 'Y') {
+        return 'G';
       }
     }
     return 'N';
@@ -129,7 +129,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
     * Method that returns the number of 
     *  rotations the color wheel has made
     */
-  public double getRotations() {
+  public double getRotationsOld() {
     if (initColor == 'N') {
       initColor = getColor(); //This might not work, only becuase the initColor would need to be a consistant one color.
       return 0;               //The rot value counts the times that it sees one color and creates the rot value
@@ -141,6 +141,28 @@ public class TestWheelOfFortuneContestant extends Subsystem {
         countTrigger = false;
     }
     return rot;
+  }
+
+  public double getRotations() {
+    if(getColor() != 'N' && !countTrigger) { //if detected color is a valid color and counting hasn't been initialized
+      initColor = getColor(); //set color to spin to as init variable
+      rot += 0.0; //set rotations to 0 - wont happen again as long as the count trigger never changes
+      countTrigger = true; //sets variable to true so  init method won't run again
+    }
+
+    boolean halfRotation = false; // boolean to determine whether the sensor is detecting the init color
+
+    if(countTrigger) { //testing if prereqs have been met in loop above
+        if(getColor() != initColor) { //checks to see if detected color is no longer the init color
+          halfRotation = true; //prepares to run loop to increment rotations when the color is detected again
+        }
+        
+        if(initColor != 'N' && initColor == getColor() && halfRotation) { //checks for the init color again
+          rot += 0.5; //add to rotation value as all reqs have been met
+          halfRotation = false; //resets rotation variable until wheel spins back to the same color.
+      }
+    }
+    return rot; //return current rotaions
   }
 
   /**
