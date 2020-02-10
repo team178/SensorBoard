@@ -102,11 +102,11 @@ public class TimeOfFlight extends SubsystemBase {
   */
 
   public void addToCounter() {
-    if (tof1.getEdge() == "Leading" && inTrigger) {
+    if (tof1.getEdge().equals("Leading") && inTrigger) {
       counter++;
       inTrigger = false;
     }
-    if (tof1.getEdge() == "No ball" && !inTrigger) {
+    if (tof1.getEdge().equals("No ball") && !inTrigger) {
       inTrigger = true;
     }
   }
@@ -118,9 +118,9 @@ public class TimeOfFlight extends SubsystemBase {
 
   public String ballMovement() {
     String direction = "No Direction";
-    if (tof1.getEdge() == "Trailing" && tof2.getEdge() == "Leading") {
+    if (tof1.getEdge().equals("Trailing") && tof2.getEdge().equals("Leading")) {
        direction = "Forwards";
-    } else if (tof2.getEdge() == "Trailing" && tof1.getEdge() == "Leading") {
+    } else if (tof2.getEdge().equals("Trailing") && tof1.getEdge().equals("Leading")) {
        direction = "Backwards";
     }
     return direction;
@@ -131,10 +131,10 @@ public class TimeOfFlight extends SubsystemBase {
    */
 
   public void removeFromCounter() {
-    if (tof3.getEdge() == "Leading" && !outTrigger) {
+    if (tof3.getEdge().equals("Leading") && !outTrigger) {
       outTrigger = true;
     }
-    if (tof3.getEdge() == "No ball" && outTrigger) {
+    if (tof3.getEdge().equals("No ball") && outTrigger) {
       counter--;
       outTrigger = false;
     }
@@ -184,11 +184,11 @@ public class TimeOfFlight extends SubsystemBase {
       twoWasLeading = true;
     }
 
-    if (getEdge1() == "Trailing") {
+    if (getEdge1().equals("Trailing")) {
       oneWasTrailing = true;
     }
 
-    if (getEdge2() == "Leading") {
+    if (getEdge2().equals("Leading")) {
       twoWasLeading = true;
     }
 
@@ -217,7 +217,7 @@ public class TimeOfFlight extends SubsystemBase {
 
   public String maximumCapacity() {
     String capacity = "Not full yet";
-    if (tof3.getEdge() == "Center") {
+    if (tof3.getEdge().equals("Center")) {
       capacity = "Maximum capacity!";
     }
     return capacity;
