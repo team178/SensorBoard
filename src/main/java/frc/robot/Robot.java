@@ -102,7 +102,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    //we'll need to write an algorithm to determine b/t rotation and position control.
     testContestant.spinRC();
+    testContestant.spinPC();
     Scheduler.getInstance().run();
   }
 
