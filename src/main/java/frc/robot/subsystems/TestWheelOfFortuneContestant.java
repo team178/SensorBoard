@@ -47,7 +47,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
   * Initializes variables from above to their appropiate values
   */
   public TestWheelOfFortuneContestant() {
-    motor = new VictorSPX(RobotMap.motor1);
+    motor = new VictorSPX(RobotMap.contestant);
     colorsensor = new ColorSensor();
     rot = 0;
     randomColor = getRandomColor();
@@ -144,6 +144,11 @@ public class TestWheelOfFortuneContestant extends Subsystem {
         rot+=0.5;
         countTrigger = false;
       }
+
+      if(rot >= 5)
+      {
+        rot = 0;
+      }
     }
     return rot;
   }
@@ -159,11 +164,17 @@ public class TestWheelOfFortuneContestant extends Subsystem {
   
   public boolean rotationControl(int desiredRotations) {
     if (getRotations() < desiredRotations) {
-      motor.set(ControlMode.PercentOutput, 1);
       return false;
     }
-    motor.set(ControlMode.PercentOutput, 0);
     return true;
+  }
+
+  public void spinRC() {
+    if (!rotationControl(3)) {
+      motor.set(ControlMode.PercentOutput, .5);
+    } else {
+      motor.set(ControlMode.PercentOutput, 0);
+    }
   }
 
   /** 
@@ -172,12 +183,18 @@ public class TestWheelOfFortuneContestant extends Subsystem {
    * color is the same as the color the robot needs to spin the wheel to
   */
   public boolean positionControl() {
-    if (randomColor == getColor()) { //getGameData() used when finished testing
-      motor.set(ControlMode.PercentOutput, 0.5);
-      return true;
+    if (randomColor != getColor()) { //getGameData() used when finished testing
+      return false;
     }
-    motor.set(ControlMode.PercentOutput, 0);
-    return false;
+    return true;
+  }
+
+  public void spinPC() {
+    if(!positionControl()) {
+      motor.set(ControlMode.PercentOutput, .5);
+    } else {
+      motor.set(ControlMode.PercentOutput, 0);
+    }
   }
 
   /**
