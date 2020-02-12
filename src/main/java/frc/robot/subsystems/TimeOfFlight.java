@@ -28,7 +28,7 @@ public class TimeOfFlight extends SubsystemBase {
   private TimeOfFlightSensor tof1;
   private TimeOfFlightSensor tof2;
   private TimeOfFlightSensor tof3;
-  private VictorSPX motor;
+  private VictorSPX lawnMower;
   protected int counter;
   private boolean inTrigger;
   private boolean outTrigger;
@@ -42,7 +42,7 @@ public class TimeOfFlight extends SubsystemBase {
     tof1 = new TimeOfFlightSensor(0x0620);
     tof2 = new TimeOfFlightSensor(0x0621);
     tof3 = new TimeOfFlightSensor(0x0624);
-    motor = new VictorSPX(RobotMap.motor1);
+    lawnMower = new VictorSPX(RobotMap.motor1);
     counter = 0;
     inTrigger = true;
     outTrigger = false;
@@ -178,9 +178,10 @@ public class TimeOfFlight extends SubsystemBase {
   public String moveMotorNew() {
 
     String status = "No Ball";
+    boolean ballInMotion = false;
     boolean buttonPressed = false;
-    boolean oneWasTrailing = false;
-    boolean twoWasLeading = false;
+    boolean oneWasLeading = false;
+    boolean twoWasCenter = false;
 
     /*
     if (getEdge1() == "Leading" || getEdge1() == "Center") {
@@ -190,26 +191,27 @@ public class TimeOfFlight extends SubsystemBase {
     */
 // what is the purpose of the comment above? delete if not needed; runs fine without it based on the test - liza
     if (buttonPressed) {
-      motor.set(ControlMode.PercentOutput, 1);
+      
+      while (counter != 4) {
+
+      oneWasLeading = false;
+      twoWasCenter = false;
+
+      lawnMower.set(ControlMode.PercentOutput, 1);
       status = "Moving";
-    }
 
-    if (buttonPressed) {
-      oneWasTrailing = false;
-      twoWasLeading = true;
-    }
+      if (getEdge1().equals("Leading")) {
+        ballInMotion = true;
+        oneWasLeading = true;
+      }
 
-    if (getEdge1().equals("Trailing")) {
-      oneWasTrailing = true;
-    }
-
-    if (getEdge2().equals("Leading")) {
-      twoWasLeading = true;
-    }
-
-    if (oneWasTrailing && twoWasLeading) {
-      motor.set(ControlMode.PercentOutput, 0);
-      status = "Not Moving";
+      if (ballInMotion && getEdge2().equals("Center")) {
+        lawnMower.set(ControlMode.PercentOutput, 0);
+        status = "Not Moving";
+        twoWasCenter = true;
+      }
+  
+      }
     }
 
     return status;

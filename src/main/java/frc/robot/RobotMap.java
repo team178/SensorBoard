@@ -13,7 +13,7 @@ package frc.robot;
 public class RobotMap {
 
     //Drive motors
-    public static int motor1 = 2;
+    public static int motor1 = 3;
 
     //DIO
     public static int limitSwitch = 11;
@@ -21,7 +21,8 @@ public class RobotMap {
     public static int bit2 = 4;
     public static int bit3 = 5;
     public static int bit4 = 6;
-    public static int contestant = 3;
+    public static int contestant = 21;//3 is used for sensor board motor.
+    
 
     //CAN - Temporary values
     public static int tofInput = 7;
