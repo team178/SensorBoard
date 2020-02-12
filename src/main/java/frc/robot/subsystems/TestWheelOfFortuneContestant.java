@@ -41,7 +41,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
   public static final Color TestRed = ColorMatch.makeColor(0.504, 0.353, 0.142);
   public static final Color TestYellow = ColorMatch.makeColor(0.312, 0.546, 0.140);
   public static final Color TestBlack = ColorMatch.makeColor(0,0,0);
-  private String gameData = DriverStation.getInstance().getGameSpecificMessage();
+  public String gameData;
 
   /*
   * Initializes variables from above to their appropiate values
@@ -53,6 +53,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
     randomColor = getRandomColor();
     initColor = getColor();
     countTrigger = false;
+    gameData = "";
   }
 
   /** 
@@ -183,7 +184,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
    * color is the same as the color the robot needs to spin the wheel to
   */
   public boolean positionControl() {
-    if (randomColor != getColor()) { //getGameData() used when finished testing
+    if (getGameData() != getColor()) { //getGameData() used when finished testing
       return false;
     }
     return true;

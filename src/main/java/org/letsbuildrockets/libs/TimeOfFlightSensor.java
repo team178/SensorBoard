@@ -41,8 +41,8 @@ public class TimeOfFlightSensor {
     //178 specific fields
     private double[] values;
     private String lastEdge;
-    public final double MAX = 150;
-    public final double MIN = 60;
+    public final double MAX = 180;
+    public final double MIN = 70;
 
     public TimeOfFlightSensor(int ID) {
         tofsensor = new CustomCAN("TOF"+String.valueOf(TOFCount), ID);
@@ -167,7 +167,7 @@ public double getD() {
   }
 
   public String getEdge() {
-    double secant = (values[1] - values[0])/0.02;
+    double secant = (values[1] - values[0])/.02;
     //System.out.println("Slope of Secant Line: " + secant);
     if (values[0] > MAX) { //test this max value
       return "No ball";

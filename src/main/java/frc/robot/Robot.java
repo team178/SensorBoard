@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -54,8 +55,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    timeofflight.addToCounter();
-    timeofflight.removeFromCounter();
+    testContestant.gameData = DriverStation.getInstance().getGameSpecificMessage();
     SmartDashboard.putNumber("TOF 1 Distance", timeofflight.getDistance1());
     SmartDashboard.putNumber("TOF 2 Distance", timeofflight.getDistance2());
     SmartDashboard.putNumber("TOF 3 Distance", timeofflight.getDistance3());
@@ -67,11 +67,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("Direction of Ball", timeofflight.ballMovement());
     SmartDashboard.putString("Full?", timeofflight.maximumCapacity());
     SmartDashboard.putString("Color Match", contestant.getColorinShuffleboard());
-    SmartDashboard.putString("Intake Motor State", timeofflight.moveMotorNew());
     //SmartDashboard.putBoolean("Rotation Control", contestant.rotationControl(4));
     SmartDashboard.putBoolean("Position Control", testContestant.positionControl());
     SmartDashboard.putString("Color Match", testContestant.testGetColorinShuffleboard());
-    SmartDashboard.putString("Intake Motor State", timeofflight.moveMotorNew());
     SmartDashboard.putBoolean("Rotation Control e", testContestant.rotationControl(3));
   }
   /**
@@ -104,7 +102,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //we'll need to write an algorithm to determine b/t rotation and position control.
-    testContestant.spinRC();
     testContestant.spinPC();
     Scheduler.getInstance().run();
   }

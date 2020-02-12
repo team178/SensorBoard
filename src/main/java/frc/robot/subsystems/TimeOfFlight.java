@@ -48,11 +48,32 @@ public class TimeOfFlight extends SubsystemBase {
     outTrigger = false;
   }
 
+  public void ballDump(double speed) {
+    if (getCounter() != 0) {
+      lawnMower.set(ControlMode.PercentOutput, speed);
+    } else {
+      lawnMower.set(ControlMode.PercentOutput, 0);
+    }
+  }
+
+  public void runMower(double speed) {
+    if (getCounter() < 4) {
+      if (!tof1.getEdge().equals("No ball")) {
+        lawnMower.set(ControlMode.PercentOutput, speed);
+      } else if (tof2.getEdge().equals("Center")) {
+        lawnMower.set(ControlMode.PercentOutput, 0);
+      }
+    } else {
+      lawnMower.set(ControlMode.PercentOutput, 0);
+    }
+  }
+
 /**
   * @return Distance for the first sensor
   */
 
   public double getDistance1() {
+    System.out.println(tof1.getD());
     return tof1.getD();
   }
 
@@ -131,7 +152,7 @@ public class TimeOfFlight extends SubsystemBase {
    */
 
   public void removeFromCounter() {
-    if (tof3.getEdge().equals("Leading") && !outTrigger) {
+    if (!(tof3.getEdge().equals("No ball")) && !outTrigger) {
       outTrigger = true;
     }
     if (tof3.getEdge().equals("No ball") && outTrigger) {
@@ -139,89 +160,13 @@ public class TimeOfFlight extends SubsystemBase {
       outTrigger = false;
     }
   }
- //* liza for button:
- // public String motorMovementString
- // import MotorSubsystem.java (?) to establish connection with the talon master motors
- // if (tof1.getEdge().equals("Leading")
-    //enable motor -* ButtonPressed = true *
-    //run until it reaches tof2 (tof2.getEdge().equals("Leading")
-    //disable it until the next ball rolls in -* ButtonPressed = !true
-
-    //* liza for dumpball:
-    // public String dumpBallOut
-    // import the necessary subsystem to establish connection with the talon motors ()
-    // enable when ballcount reaches "Maximum Capacity!" & when the ball triggers off the last tof sensor
-    // if (tof3.getEdge().equals("Center"))
-    // shoot the ball out - because if it is located at the end, it should be shot out logically I think 
-
-/**
- *
-   * Method that runs motor based on ball location
-   * @return String that indicates location of ball
-   */
-
-  /*
-  public String moveMotor() {
-    String state = "no ball";
-    if (getEdge1() == "Leading") {
-      motor.set(ControlMode.PercentOutput, 1);
-      state = "Moving";
-    } else if (getEdge2() == "Trailing") {
-      motor.set(ControlMode.PercentOutput, 0);
-      System.out.println("stopped");
-      state = "Not Moving";
-    }
-    return state;
-  }
-  */
-
-  public String moveMotorNew() {
-
-    String status = "No Ball";
-    boolean ballInMotion = false;
-    boolean buttonPressed = false;
-    boolean oneWasLeading = false;
-    boolean twoWasCenter = false;
-
-    /*
-    if (getEdge1() == "Leading" || getEdge1() == "Center") {
-      motor.set(ControlMode.PercentOutput, 1);
-      status = "Moving";
-    }
-    */
-// what is the purpose of the comment above? delete if not needed; runs fine without it based on the test - liza
-    if (buttonPressed) {
-      
-      while (counter != 4) {
-
-      oneWasLeading = false;
-      twoWasCenter = false;
-
-      lawnMower.set(ControlMode.PercentOutput, 1);
-      status = "Moving";
-
-      if (getEdge1().equals("Leading")) {
-        ballInMotion = true;
-        oneWasLeading = true;
-      }
-
-      if (ballInMotion && getEdge2().equals("Center")) {
-        lawnMower.set(ControlMode.PercentOutput, 0);
-        status = "Not Moving";
-        twoWasCenter = true;
-      }
-  
-      }
-    }
-
-    return status;
-  }
-
   /**
    * @return Integer for the counter value
    */
 
   public int getCounter() {
+    addToCounter();
+    removeFromCounter();
     counterFixer();
     return counter;
   }

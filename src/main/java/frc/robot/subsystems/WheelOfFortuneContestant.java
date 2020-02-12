@@ -167,11 +167,11 @@ public class WheelOfFortuneContestant extends Subsystem {
    * color is the same as the color the robot needs to spin the wheel to
   */
   public boolean positionControl() {
-    if (randomColor == getColor()) { //getGameData() used when finished testing
-      motor.set(ControlMode.PercentOutput, 0.5);
+    if (getGameData() == getColor()) { //getGameData() used when finished testing
+      motor.set(ControlMode.PercentOutput, 0);
       return true;
     }
-    motor.set(ControlMode.PercentOutput, 0);
+    motor.set(ControlMode.PercentOutput, 0.5);
     return false;
   }
 
