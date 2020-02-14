@@ -71,6 +71,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Position Control", testContestant.positionControl());
     SmartDashboard.putString("Color Match", testContestant.testGetColorinShuffleboard());
     SmartDashboard.putBoolean("Rotation Control e", testContestant.rotationControl(3));
+    SmartDashboard.putBoolean("CountTrigger", testContestant.getCountTrigger());
   }
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -102,7 +103,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //we'll need to write an algorithm to determine b/t rotation and position control.
-    testContestant.spinPC();
+    testContestant.spinRC();
     Scheduler.getInstance().run();
   }
 
