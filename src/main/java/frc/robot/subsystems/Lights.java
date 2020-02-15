@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.OI;
 
 
 public class Lights extends SubsystemBase {
@@ -22,10 +24,12 @@ public class Lights extends SubsystemBase {
   protected DriverStation ds;
   protected boolean received;
   protected boolean sent;
+  private boolean buffer;
 
   public Lights(Port port, int address) {
     arduino = new I2C(port, address);
     ds = DriverStation.getInstance();
+    buffer = true;
   }
 
 
@@ -44,6 +48,8 @@ public boolean sendMessage(char message){
   byte[] bytearray=new byte[1];
   bytearray[0]=(byte)message;
   sent=!arduino.writeBulk(bytearray);
+  //System.out.println("Message:  " + message + "sent? " + sent);
+  //System.out.println(message); 
   return sent;
 }
   public byte[] receiveMessage(int address) //for which i2c address to read from
@@ -75,15 +81,15 @@ public boolean sendMessage(char message){
   //Lights methods -- sends characters to arduino to indicate different light colors
   public boolean setAllianceColor() {
     if (ds.getAlliance() == Alliance.Blue) {
-      return sendMessage('b');
+      return blue();
     }
     else {
-      return sendMessage('r');
+      return red();
     }
   }
 
   public boolean red() {
-    System.out.println("red");
+    //System.out.println("red");
     return sendMessage('r');
   }
 
@@ -98,14 +104,42 @@ public boolean sendMessage(char message){
     return sendMessage('n');
   }
 
-  /*public boolean ball()
+  public boolean lightsaber()
   {
-    return sendMessage( Number of balls in conveyer);
-  }*/
+    System.out.println("l");
+    return sendMessage('l');
+  }
 
+  public boolean ball(int balls)
+  {
+    int bin = Integer.parseInt(Integer.toBinaryString(balls));
+    char output = (char)bin;
+    //System.out.println(output);
+    return sendMessage(output);
+  }
 
+  int msg = 0;
   @Override
   public void periodic() {
+    System.out.println(msg);
+    if(OI.a.get() && buffer && msg < 5){
+      msg++;
+      ball(msg);
+      buffer = false;
+    } else if(OI.b.get() && buffer && msg > 0){
+      msg--;
+      ball(msg);
+      buffer = false;
+    }
+    
+    if(!OI.a.get() && !OI.b.get()){
+      buffer = true;
+    }
+
+   // lightsaber();
+    setAllianceColor();
+    //red();
+    //blue();
     //lights patterns go here 
   }
 }

@@ -22,6 +22,9 @@ import frc.robot.commands.*;
 public class OI {
     public static Joystick xbox = new Joystick(RobotMap.xbox);
     public static Button a = new JoystickButton(xbox, 1);
+    public static Button b = new JoystickButton(xbox, 2);
+    public static Button x = new JoystickButton(xbox, 3);
+    public static Button y = new JoystickButton(xbox, 4);
     
     public OI () {
        // xboxA.whenPressed(new MoveMotor());

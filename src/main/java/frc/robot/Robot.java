@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
     */
 
     lights = new Lights(I2C.Port.kOnboard, 4);
-    //lights.blue();
+
 
   }
  
