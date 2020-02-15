@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
     */
 
     lights = new Lights(I2C.Port.kOnboard, 4);
-    lights.blue();
+    //lights.blue();
 
   }
  
@@ -65,6 +65,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    lights.periodic();
+
     //testContestant.gameData = DriverStation.getInstance().getGameSpecificMessage();
     /*
     SmartDashboard.putNumber("TOF 1 Distance", timeofflight.getDistance1());
