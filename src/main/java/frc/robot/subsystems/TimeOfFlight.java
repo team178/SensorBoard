@@ -16,8 +16,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import org.letsbuildrockets.libs.TimeOfFlightSensor;
 
 /**
- * @author Robbie Fishel
- * @author Ronit Banerjee
+ * @author Robit Fisheljee
  * @version 1.0
  * @since 2020.1.2
  * 
