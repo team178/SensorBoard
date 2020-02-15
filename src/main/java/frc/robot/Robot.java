@@ -15,6 +15,8 @@ import frc.robot.subsystems.WheelOfFortuneContestant;
 import frc.robot.subsystems.MotorSubsystem;
 import frc.robot.subsystems.TestWheelOfFortuneContestant;
 import frc.robot.subsystems.TimeOfFlight;
+import frc.robot.subsystems.Lights;
+import edu.wpi.first.wpilibj.I2C;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +32,7 @@ public class Robot extends TimedRobot {
   public static TimeOfFlight timeofflight;
   public static WheelOfFortuneContestant contestant;
   public static TestWheelOfFortuneContestant testContestant;
+  public static Lights lights; 
   
 
   /**
@@ -38,13 +41,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    /*
     oi = new OI();
     motorSubsystem = new MotorSubsystem();
     timeofflight = new TimeOfFlight();
     contestant = new WheelOfFortuneContestant();
     testContestant = new TestWheelOfFortuneContestant();
-  }
+    */
 
+    lights = new Lights(I2C.Port.kOnboard, 4);
+    lights.blue();
+
+  }
+ 
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -55,7 +65,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    testContestant.gameData = DriverStation.getInstance().getGameSpecificMessage();
+    //testContestant.gameData = DriverStation.getInstance().getGameSpecificMessage();
+    /*
     SmartDashboard.putNumber("TOF 1 Distance", timeofflight.getDistance1());
     SmartDashboard.putNumber("TOF 2 Distance", timeofflight.getDistance2());
     SmartDashboard.putNumber("TOF 3 Distance", timeofflight.getDistance3());
@@ -72,6 +83,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("Color Match", testContestant.testGetColorinShuffleboard());
     SmartDashboard.putBoolean("Rotation Control e", testContestant.rotationControl(3));
     SmartDashboard.putBoolean("CountTrigger", testContestant.getCountTrigger());
+    */
   }
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -103,8 +115,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //we'll need to write an algorithm to determine b/t rotation and position control.
-    testContestant.spinRC();
+    //testContestant.spinRC();
     Scheduler.getInstance().run();
+    
   }
 
   /**
