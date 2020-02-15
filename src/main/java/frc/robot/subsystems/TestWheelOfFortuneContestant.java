@@ -8,7 +8,7 @@ import com.revrobotics.ColorMatch;
 
 import org.letsbuildrockets.libs.ColorSensor;
 
-import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.RobotMap;
@@ -39,9 +39,9 @@ public class TestWheelOfFortuneContestant extends Subsystem {
   public static final Color TestBlue = ColorMatch.makeColor(0.208, 0.471, 0.320);
   public static final Color TestGreen = ColorMatch.makeColor(0.240, 0.568, 0.191);
   public static final Color TestRed = ColorMatch.makeColor(0.504, 0.353, 0.142);
-  public static final Color TestYellow = ColorMatch.makeColor(0.312, 0.546, 0.140);
+  public static final Color TestYellow = ColorMatch.makeColor(0.305, 0.546, 0.140);
   public static final Color TestBlack = ColorMatch.makeColor(0,0,0);
-  private String gameData = DriverStation.getInstance().getGameSpecificMessage();
+  public String gameData;
 
   /*
   * Initializes variables from above to their appropiate values
@@ -53,6 +53,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
     randomColor = getRandomColor();
     initColor = getColor();
     countTrigger = false;
+    gameData = "";
   }
 
   /** 
@@ -130,9 +131,9 @@ public class TestWheelOfFortuneContestant extends Subsystem {
     *  rotations the color wheel has made
     */
   public double getRotations() {
-    if (initColor == 'N') {
-      initColor = getColor(); //This might not work, only becuase the initColor would need to be a consistant one color.
-      return 0;
+    if (initColor == 'N' && (getColor() == 'R' || getColor() == 'G' || getColor() == 'Y' || getColor() == 'B')) {
+      initColor = 'R'; //This might not work, only becuase the initColor would need to be a consistant one color.
+      return 0;        //value is set to red for now, this may change with the correct color vals
     }
     
     if (initColor != getColor() && getColor() != 'N') {
@@ -141,11 +142,11 @@ public class TestWheelOfFortuneContestant extends Subsystem {
     
     if (countTrigger) {
       if (initColor == getColor()) {
-        rot+=0.5;
         countTrigger = false;
+        rot+=0.5;
       }
 
-      if(rot >= 5)
+      if(rot > 5)
       {
         rot = 0;
       }
@@ -162,7 +163,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
    * Detects when the wheel has spun enough times in order to stop automatically
    */
   
-  public boolean rotationControl(int desiredRotations) {
+  public boolean rotationControl(double desiredRotations) {
     if (getRotations() < desiredRotations) {
       return false;
     }
@@ -170,8 +171,8 @@ public class TestWheelOfFortuneContestant extends Subsystem {
   }
 
   public void spinRC() {
-    if (!rotationControl(3)) {
-      motor.set(ControlMode.PercentOutput, .5);
+    if (!rotationControl(4)) {
+      motor.set(ControlMode.PercentOutput, 1);
     } else {
       motor.set(ControlMode.PercentOutput, 0);
     }
@@ -183,7 +184,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
    * color is the same as the color the robot needs to spin the wheel to
   */
   public boolean positionControl() {
-    if (randomColor != getColor()) { //getGameData() used when finished testing
+    if (getGameData() != getColor()) { //getGameData() used when finished testing
       return false;
     }
     return true;
@@ -191,7 +192,7 @@ public class TestWheelOfFortuneContestant extends Subsystem {
 
   public void spinPC() {
     if(!positionControl()) {
-      motor.set(ControlMode.PercentOutput, .5);
+      motor.set(ControlMode.PercentOutput, .4);
     } else {
       motor.set(ControlMode.PercentOutput, 0);
     }
@@ -238,6 +239,9 @@ public class TestWheelOfFortuneContestant extends Subsystem {
     return "No Color";
   }
   
+  public boolean getCountTrigger() {
+    return countTrigger;
+  }
     
 }
 
